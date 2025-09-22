@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "@ibm-materials/ts-smiles-drawer": "^0.0.3"
+    "smiles-drawer": "^2.1.7"
   }
 }
