@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, Injectable, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 // Import RDKitModule as a value, not just a type
 import {RDKitModule} from '@rdkit/rdkit';
 import { first, Observable, ReplaySubject } from 'rxjs';
@@ -10,18 +11,35 @@ import { first, Observable, ReplaySubject } from 'rxjs';
   styleUrls: ['./chemical.component.css']
 })
 export class ChemicalComponent implements AfterViewInit {
-  smile : string = "CCC";
-  svg : string | undefined = "";
+  smile : string = "CCCCCCC";
+  svg : undefined | SafeHtml = "";
 
-  constructor(private rdkitService: RDKitLoaderService){
+  constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer){
   }
 
   ngAfterViewInit() {
     this.rdkitService.getRDKit().subscribe(
       (rdkit: RDKitModule) => {
-          this.svg = rdkit.get_mol(this.smile)?.get_svg();
+          const temp : string | undefined = rdkit.get_mol(this.smile)?.get_svg(this.EstimateSize(this.smile).width, this.EstimateSize(this.smile).height);
+          if (temp)
+            this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp);
       }
     )
+  }
+
+  EstimateSize(smile: string): {width: number, height: number} {
+    let letters_only = smile.replace(/[^A-Za-z]/g, '');
+    let numbers_only = smile.replace(/[^0-9]/g, '');
+    let wf = 1 + letters_only.length * 0.05 - numbers_only.length * 0.07;
+    let width = Math.max(64, window.outerWidth * 0.085) * wf;
+    let height = Math.max(60, window.outerWidth * 0.08);
+
+    // limit width to 30% of screen width
+    if (width > window.outerWidth * 0.3) {
+      width = window.outerWidth * 0.3;
+    }
+
+    return {width: width, height: height};
   }
 }
 
