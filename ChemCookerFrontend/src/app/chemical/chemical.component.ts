@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Injectable, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Injectable, Input, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 // Import RDKitModule as a value, not just a type
 import {RDKitModule} from '@rdkit/rdkit';
@@ -11,8 +11,10 @@ import { first, Observable, ReplaySubject } from 'rxjs';
   styleUrls: ['./chemical.component.css']
 })
 export class ChemicalComponent implements AfterViewInit {
-  smile : string = "CCCCCCC";
-  svg : undefined | SafeHtml = "";
+  @Input() smile : string = "C1C2CC3CC1CC(C2)C3";
+  @Input() iupac : string = "tricyclo["
+  @Input() givenname : string = "Adamantane";
+  svg : undefined | SafeHtml;
 
   constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer){
   }
