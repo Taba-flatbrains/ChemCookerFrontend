@@ -32,12 +32,18 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   }
 
   @ViewChild('box') box : ElementRef | undefined;
+  ManualDragging : boolean = false;
   ngOnInit(): void {
-    if(this.initialPosition) {
-      this.position = this.initialPosition;
-    }
-    if(this.draggable) {
-      this.Style = {'position': 'absolute', 'top.px': this.position?.y, 'left.px': this.position?.x};
+    if(this.draggable && this.initialPosition) {
+      this.Style = {'position': 'absolute', 'top.px': this.initialPosition.y, 'left.px': this.initialPosition.x};
+      this.ManualDragging = true;
+      addEventListener("mouseup", (event) => { this.ManualDragging = false; });
+      addEventListener("mousemove", (event) => {
+        if(this.ManualDragging) {
+          this.initialPosition = {x: event.clientX - this.rect.width / 2, y: event.clientY - this.rect.height / 2};
+          this.Style = {'position': 'absolute', 'top.px': this.initialPosition.y, 'left.px': this.initialPosition.x};
+        }
+      });
     }
   }
 
