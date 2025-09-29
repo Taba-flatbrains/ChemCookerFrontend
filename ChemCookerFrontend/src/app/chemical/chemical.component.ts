@@ -19,12 +19,14 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   @Input() draggable : boolean = true;
   @Input() initialPosition : {x: number, y: number} | undefined;
   @Input() ChemicalsInAction : Chemical[] = [];
+  @Input() IndexInCIA : number | undefined;
   Style : { [klass: string]: any; } = {};
 
   @Output() position : {x: number, y: number} | undefined;
   @Output() rect : {width: number, height: number} = {width: 64, height: 60};
 
   svg : undefined | SafeHtml;
+  active : boolean = true;
 
   constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef){
   }
@@ -72,8 +74,9 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
 
   dragEnd($event: CdkDragEnd) {
     this.position = $event.source.getFreeDragPosition();
-    if(this.position.y > window.innerHeight - this.rect.height * 2) {
-      
+    if (!this.initialPosition) { return;}
+    if(this.position.y + this.initialPosition.y + this.rect.height / 2 > window.innerHeight - Math.max(90, Math.min(window.innerWidth * 16 + 30, window.innerHeight * 0.35))) {
+      this.active = false; // non optimal solution
     }
   }
 

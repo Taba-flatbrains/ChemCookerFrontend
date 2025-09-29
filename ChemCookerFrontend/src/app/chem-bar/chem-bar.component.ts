@@ -12,7 +12,7 @@ export class ChemBarComponent {
 
 export function newChemical(smile: string, iupac: string = "", givenname: string = "", initpos : {x: number, y: number} | undefined = undefined) : Chemical 
 {
-  return {smile: smile, iupac: iupac, givenname: givenname, initpos: initpos};
+  return {smile: smile, iupac: iupac, givenname: givenname, initpos: initpos, key: crypto.randomUUID()};
 }
 
 export interface Chemical {
@@ -20,4 +20,5 @@ export interface Chemical {
   iupac: string;
   givenname: string;
   initpos : {x: number, y: number} | undefined;
+  key : string;
 }

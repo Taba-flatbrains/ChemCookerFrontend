@@ -1,7 +1,7 @@
 <div class="flex-column">
     <div class="action-space">
         <div *ngFor="let chemical of ChemicalsInAction">
-            <chemical *ngIf="chemical" [smile]="chemical.smile" [givenname]="chemical.givenname" [iupac]="chemical.iupac" [initialPosition]="chemical.initpos"></chemical>
+            <chemical *ngIf="chemical" [IndexInCIA]="ChemicalsInAction.indexOf(chemical)" [smile]="chemical.smile" [givenname]="chemical.givenname" [iupac]="chemical.iupac" [initialPosition]="chemical.initpos"></chemical>
         </div>
     </div>
     <app-chem-bar [ChemicalsInAction]="ChemicalsInAction"></app-chem-bar>
