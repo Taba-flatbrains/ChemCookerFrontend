@@ -1,4 +1,4 @@
-<div class="bottom-toolbar">
+<div class="bottom-toolbar" id="scroller" (wheel)="onWheel($event)">
     <div *ngFor="let chemical of chemicals">
         <chemical class="chemical" [smile]="chemical.smile" [givenname]="chemical.givenname" [iupac]="chemical.iupac" [ChemicalsInAction]="ChemicalsInAction" [draggable]="false"></chemical>
     </div>

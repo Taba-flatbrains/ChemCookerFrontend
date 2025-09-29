@@ -1,4 +1,4 @@
-import { CdkDrag, CdkDragEnd } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragEnd, CdkDragHandle, DragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Injectable, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 // Import RDKitModule as a value, not just a type
@@ -28,16 +28,16 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   svg : undefined | SafeHtml;
   active : boolean = true;
 
-  constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef){
+  constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef) {
   }
 
+  @ViewChild('box') box : ElementRef | undefined;
   ngOnInit(): void {
     if(this.initialPosition) {
       this.position = this.initialPosition;
     }
     if(this.draggable) {
       this.Style = {'position': 'absolute', 'top.px': this.position?.y, 'left.px': this.position?.x};
-
     }
   }
 
