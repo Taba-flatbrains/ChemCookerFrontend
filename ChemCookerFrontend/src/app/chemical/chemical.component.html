@@ -1,4 +1,4 @@
-<div class="box" cdkDrag >
+<div class="box" cdkDrag (cdkDragEnded)="dragEnd($event)">
     <div #molSVG [innerHTML]="svg"></div>
     <div class="text-flex">
     <p class="text givenname">{{givenname}}</p>

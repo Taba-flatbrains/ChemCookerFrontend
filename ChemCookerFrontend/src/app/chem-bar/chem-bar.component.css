@@ -1,0 +1,10 @@
+.bottom-toolbar {
+  width: 100%;
+  min-height: 132px; 
+  height: 16vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ffffff;
+  border-top: 2px solid #ccc;
+}

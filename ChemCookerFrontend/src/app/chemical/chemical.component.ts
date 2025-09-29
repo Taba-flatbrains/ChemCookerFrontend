@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, Injectable, Input, OnDestroy, OnInit } from '@angular/core';
+import { CdkDragEnd } from '@angular/cdk/drag-drop';
+import { AfterViewInit, Component, Injectable, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 // Import RDKitModule as a value, not just a type
 import {RDKitModule} from '@rdkit/rdkit';
@@ -14,6 +15,10 @@ export class ChemicalComponent implements AfterViewInit {
   @Input() smile : string = "C1C2CC3CC1CC(C2)C3";
   @Input() iupac : string = "tricyclo["
   @Input() givenname : string = "Adamantane";
+
+  @Output() position : {x: number, y: number} = {x: 0, y: 0};
+  @Output() rect : {width: number, height: number} = {width: 64, height: 60};
+
   svg : undefined | SafeHtml;
 
   constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer){
@@ -41,7 +46,12 @@ export class ChemicalComponent implements AfterViewInit {
       width = window.outerWidth * 0.3;
     }
 
+    this.rect = {width: width, height: height};
     return {width: width, height: height};
+  }
+
+  dragEnd($event: CdkDragEnd) {
+    this.position = $event.source.getFreeDragPosition();
   }
 }
 

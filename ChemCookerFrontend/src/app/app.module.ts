@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { ChemicalComponent } from './chemical/chemical.component';
 
 import {CdkDrag} from '@angular/cdk/drag-drop';
+import { ChemBarComponent } from './chem-bar/chem-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChemicalComponent
+    ChemicalComponent,
+    ChemBarComponent
   ],
   imports: [
     BrowserModule,

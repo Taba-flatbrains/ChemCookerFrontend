@@ -1,0 +1,18 @@
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  width: 100dvw;
+  margin: 0;
+  padding: 0;
+}
+
+.action-space {
+  flex: 1;
+}
+
+::ng-deep * {
+      
+    margin: 0;
+    padding: 0;
+  }
