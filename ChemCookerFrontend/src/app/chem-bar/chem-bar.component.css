@@ -1,10 +1,16 @@
 .bottom-toolbar {
   width: 100%;
-  min-height: 132px; 
-  height: 16vw;
+  min-height: 90px; 
+  height: calc(16vw + 30px);
+  max-height: 35vh;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
   background-color: #ffffff;
   border-top: 2px solid #ccc;
+  overflow-x: auto;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.chemical {
+  margin: 4px;
 }

@@ -1,1 +1,5 @@
-<div class="bottom-toolbar"></div>
+<div class="bottom-toolbar">
+    <div *ngFor="let chemical of chemicals">
+        <chemical class="chemical" [smile]="chemical.smile" [givenname]="chemical.givenname" [iupac]="chemical.iupac" [ChemicalsInAction]="ChemicalsInAction" [draggable]="false"></chemical>
+    </div>
+</div>

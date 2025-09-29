@@ -1,9 +1,10 @@
-import { CdkDragEnd } from '@angular/cdk/drag-drop';
-import { AfterViewInit, Component, Injectable, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { CdkDrag, CdkDragEnd } from '@angular/cdk/drag-drop';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Injectable, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 // Import RDKitModule as a value, not just a type
 import {RDKitModule} from '@rdkit/rdkit';
 import { first, Observable, ReplaySubject } from 'rxjs';
+import { Chemical, newChemical } from '../chem-bar/chem-bar.component';
 
 @Component({
   selector: 'chemical',
@@ -11,17 +12,31 @@ import { first, Observable, ReplaySubject } from 'rxjs';
   templateUrl: './chemical.component.html',
   styleUrls: ['./chemical.component.css']
 })
-export class ChemicalComponent implements AfterViewInit {
+export class ChemicalComponent implements AfterViewInit, OnInit {
   @Input() smile : string = "C1C2CC3CC1CC(C2)C3";
   @Input() iupac : string = "tricyclo["
   @Input() givenname : string = "Adamantane";
+  @Input() draggable : boolean = true;
+  @Input() initialPosition : {x: number, y: number} | undefined;
+  @Input() ChemicalsInAction : Chemical[] = [];
+  Style : { [klass: string]: any; } = {};
 
-  @Output() position : {x: number, y: number} = {x: 0, y: 0};
+  @Output() position : {x: number, y: number} | undefined;
   @Output() rect : {width: number, height: number} = {width: 64, height: 60};
 
   svg : undefined | SafeHtml;
 
-  constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer){
+  constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef){
+  }
+
+  ngOnInit(): void {
+    if(this.initialPosition) {
+      this.position = this.initialPosition;
+    }
+    if(this.draggable) {
+      this.Style = {'position': 'absolute', 'top.px': this.position?.y, 'left.px': this.position?.x};
+
+    }
   }
 
   ngAfterViewInit() {
@@ -30,6 +45,7 @@ export class ChemicalComponent implements AfterViewInit {
           const temp : string | undefined = rdkit.get_mol(this.smile)?.get_svg(this.EstimateSize(this.smile).width, this.EstimateSize(this.smile).height);
           if (temp)
             this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp);
+          this.cdref.detectChanges();
       }
     )
   }
@@ -45,6 +61,10 @@ export class ChemicalComponent implements AfterViewInit {
     if (width > window.outerWidth * 0.3) {
       width = window.outerWidth * 0.3;
     }
+    // limit height to 20% of screen height
+    if (height > window.outerHeight * 0.10) {
+      height = window.outerHeight * 0.10;
+    }
 
     this.rect = {width: width, height: height};
     return {width: width, height: height};
@@ -52,6 +72,14 @@ export class ChemicalComponent implements AfterViewInit {
 
   dragEnd($event: CdkDragEnd) {
     this.position = $event.source.getFreeDragPosition();
+    if(this.position.y > window.innerHeight - this.rect.height * 2) {
+      
+    }
+  }
+
+  duplicate(event : MouseEvent) {
+    if(this.draggable) return;
+    this.ChemicalsInAction.push(newChemical(this.smile, this.iupac, this.givenname, {x: event.clientX - this.rect.width / 2, y: event.clientY - this.rect.height / 2}));
   }
 }
 
