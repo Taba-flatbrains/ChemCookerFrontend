@@ -1,13 +1,16 @@
 <div class="bottom-toolbar" id="scroller" (wheel)="onWheel($event)">
     <div class="search-criteria">
-        <input type="text" placeholder="Search..." (input)="onSearchChange($event)" [formControl]="seachFormControl"/>
+        <mat-form-field>
+            <input matInput (input)="onSearchChange($event)" [formControl]="seachFormControl"/>
+        </mat-form-field>
+        
         <select (change)="onFilterChange($event)">
             <option value="all">All</option>
             <option value="givenname">Given Name</option>
             <option value="iupac">IUPAC Name</option>
             <option value="smile">SMILES</option>
         </select>
-        <button (click)="clearSearch()">Clear</button>
+        <button mat-button (click)="clearSearch()">Clear</button>
     </div>
 
     <div *ngFor="let chemical of visibleChemicals">
