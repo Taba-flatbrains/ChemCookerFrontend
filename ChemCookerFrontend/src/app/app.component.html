@@ -1,7 +1,8 @@
 <div class="flex-column">
     <div class="action-space">
-        <button mat-button class="button" *ngIf="!loggedInService.LoggedIn">Login</button>
-        <button mat-button class="button" *ngIf="!loggedInService.LoggedIn">Sign up</button>
+        <button mat-button class="button" *ngIf="!loggedInService.LoggedIn" (click)="openLoginDialog()">Login</button>
+        <button mat-button class="button" *ngIf="!loggedInService.LoggedIn" (click)="openSignUpDialog()">Sign up</button>
+        <!-- Todo: add skilltree, quests, and current quest -->
         <div *ngFor="let chemical of ChemicalsInAction">
             <chemical *ngIf="chemical" [IndexInCIA]="ChemicalsInAction.indexOf(chemical)" [smile]="chemical.smile" [givenname]="chemical.givenname" [iupac]="chemical.iupac" [initialPosition]="chemical.initpos"></chemical>
         </div>

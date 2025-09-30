@@ -21,6 +21,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoggedInService } from './login/logged-in.service';
 import { BackendService } from './util/backend.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule, BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
 ],
   providers: [LoggedInService, BackendService],
   bootstrap: [AppComponent]

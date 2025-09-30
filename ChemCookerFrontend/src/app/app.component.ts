@@ -3,6 +3,17 @@ import { RouterOutlet } from '@angular/router';
 import { ChemicalComponent } from './chemical/chemical.component';
 import { Chemical } from './chem-bar/chem-bar.component';
 import { LoggedInService } from './login/logged-in.service';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +22,16 @@ import { LoggedInService } from './login/logged-in.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(public loggedInService:LoggedInService) { }
+  constructor(public loggedInService:LoggedInService, private dialog:MatDialog) { }
 
   title = 'ChemCookerFrontend';
   ChemicalsInAction : Chemical[] = [];
+
+  openLoginDialog() {
+    const dialogRef = this.dialog.open(LoginComponent);
+  }
+
+  openSignUpDialog() {
+    const dialogRef = this.dialog.open(SignUpComponent);
+  }
 }
