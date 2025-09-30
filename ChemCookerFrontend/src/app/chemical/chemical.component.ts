@@ -69,7 +69,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
     if (width > window.outerWidth * 0.3) {
       width = window.outerWidth * 0.3;
     }
-    // limit height to 20% of screen height
+    // limit height to 10% of screen height
     if (height > window.outerHeight * 0.10) {
       height = window.outerHeight * 0.10;
     }

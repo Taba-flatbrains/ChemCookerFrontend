@@ -8,6 +8,7 @@ import { ChemicalComponent } from './chemical/chemical.component';
 import {CdkDrag} from '@angular/cdk/drag-drop';
 import { ChemBarComponent } from './chem-bar/chem-bar.component';
 import { CdkScrollable } from "@angular/cdk/scrolling";
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CdkScrollable } from "@angular/cdk/scrolling";
     BrowserModule,
     AppRoutingModule,
     CdkDrag,
-    CdkScrollable
+    CdkScrollable,
+    ReactiveFormsModule
 ],
   providers: [],
   bootstrap: [AppComponent]
