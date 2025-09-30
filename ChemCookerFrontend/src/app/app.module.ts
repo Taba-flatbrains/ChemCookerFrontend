@@ -16,12 +16,16 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChemicalComponent,
-    ChemBarComponent
+    ChemBarComponent,
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
