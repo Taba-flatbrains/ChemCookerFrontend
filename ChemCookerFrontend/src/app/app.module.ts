@@ -18,6 +18,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { LoggedInService } from './login/logged-in.service';
+import { BackendService } from './util/backend.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,9 +40,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     MatInputModule, 
     MatSelectModule, BrowserAnimationsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
 ],
-  providers: [],
+  providers: [LoggedInService, BackendService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

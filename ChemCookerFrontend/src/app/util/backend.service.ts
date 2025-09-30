@@ -1,7 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+    providedIn: 'root'
+})
 export class BackendService {
   constructor(private http: HttpClient) {}
 
@@ -43,6 +47,30 @@ export interface LoginRequest {
     password: string;
 }
 
+export interface CreateAccountRequest {
+    username: string;
+    password: string;
+    email: string;
+}
+
+export interface CookRequest {
+    chemicals: string[]; // array of smiles
+    temperature: string;
+    hv: string;
+}
+
+export interface SubmitReactionRequest {
+    reactants: string[]; // array of smiles
+    products: string[]; // array of smiles
+    temperature: string;
+    hv: string;
+}
+
+export interface NicknameChemicalRequest {
+    smiles: string;
+    nickname: string;
+}
+
 // Response Types
 export interface ValidTokenResponse {
     valid: boolean;
@@ -52,3 +80,30 @@ export interface LoginResponse {
     success: boolean;
     token: string;
 }
+
+export interface CreateAccountResponse { // same as login response
+    success: boolean;
+    token: string;
+}
+
+export interface CookResponse {
+    success: boolean;
+    products: string[]; // array of smiles
+}
+
+export interface SubmitReactionResponse {
+    success: boolean;
+}
+
+export interface NicknameChemicalResponse {
+    success: boolean;
+}
+
+export interface AvailableSkillpointsResponse {
+    skillpoints: number;
+}
+
+export interface AvailableChemicalsResponse {
+    chemicals: string[]; // array of smiles
+}
+

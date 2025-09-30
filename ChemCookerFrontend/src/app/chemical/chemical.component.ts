@@ -37,7 +37,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
     if(this.draggable && this.initialPosition) {
       this.Style = {'position': 'absolute', 'top.px': this.initialPosition.y, 'left.px': this.initialPosition.x};
       this.ManualDragging = true;
-      addEventListener("mouseup", (event) => { this.ManualDragging = false; });
+      addEventListener("mouseup", (event) => { this.ManualDragging = false; this.checkOutOfBounds(); });
       addEventListener("mousemove", (event) => {
         if(this.ManualDragging) {
           this.initialPosition = {x: event.clientX - this.rect.width / 2, y: event.clientY - this.rect.height / 2};
@@ -80,6 +80,13 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
 
   dragEnd($event: CdkDragEnd) {
     this.position = $event.source.getFreeDragPosition();
+    this.checkOutOfBounds();
+  }
+
+  checkOutOfBounds() {
+    if (!this.position) {
+      this.position = {x: 0, y: 0};
+    }
     if (!this.initialPosition) { return;}
     if(this.position.y + this.initialPosition.y + this.rect.height / 2 > window.innerHeight - Math.max(90, Math.min(window.innerWidth * 16 + 30, window.innerHeight * 0.35))) {
       this.active = false; // non optimal solution
