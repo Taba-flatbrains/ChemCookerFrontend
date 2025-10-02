@@ -20,13 +20,15 @@ export class LoggedInService {
         return this.backendService.Get<ValidTokenResponse>(GetRequestTypeUrls.ValidateToken);
     }
 
-    UpdateLoggedInStatus() {
+    UpdateLoggedInStatus(Subscription: (valid:boolean) => void = (valid:boolean) => {}) {
         if (!this.cookieService.check('token')) {
             this.LoggedIn = false;
             return;
         }
         this.CheckLoggedIn().subscribe(response => {
             this.LoggedIn = response.valid;
+            Subscription(this.LoggedIn);
+            // if the token is not valid, delete it
             if (!this.LoggedIn) {
                 this.cookieService.delete('token');
             }

@@ -28,10 +28,16 @@ export class AppComponent {
   ChemicalsInAction : Chemical[] = [];
 
   openLoginDialog() {
-    const dialogRef = this.dialog.open(LoginComponent);
+    const dialogRef = this.dialog.open(LoginComponent, {
+      height: '600px',
+      width: '500px',
+    });
   }
 
   openSignUpDialog() {
-    const dialogRef = this.dialog.open(SignUpComponent);
+    const dialogRef = this.dialog.open(SignUpComponent, {
+      height: '600px',
+      width: '500px',
+    });
   }
 }
