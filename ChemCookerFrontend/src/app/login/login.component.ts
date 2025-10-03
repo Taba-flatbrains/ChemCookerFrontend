@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { BackendService, LoginRequest, LoginResponse, PostRequestTypeUrls } from '../util/backend.service';
 import { LoggedInService } from './logged-in.service';
@@ -20,5 +20,11 @@ export class LoginComponent {
       this.cookieService.set('token', response.token);
       this.loggedInService.LoggedIn = true;
     });
+  }
+
+  hide = signal(true);
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
   }
 }
