@@ -34,4 +34,11 @@ export class LoggedInService {
             }
         });
     }
+
+    logout() {
+        if (this.cookieService.check('token')) {
+            this.cookieService.delete('token');
+        }
+        this.LoggedIn = false;
+    }
 }

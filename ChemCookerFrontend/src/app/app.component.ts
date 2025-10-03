@@ -29,8 +29,7 @@ export class AppComponent {
 
   openLoginDialog() {
     const dialogRef = this.dialog.open(LoginComponent, {
-      height: '600px',
-      width: '500px',
+      
     });
   }
 
@@ -39,5 +38,9 @@ export class AppComponent {
       height: '600px',
       width: '500px',
     });
+  }
+
+  logout() {
+    this.loggedInService.logout();
   }
 }
