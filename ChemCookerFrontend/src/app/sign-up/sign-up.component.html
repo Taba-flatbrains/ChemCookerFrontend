@@ -1,18 +1,24 @@
 <div class="column">
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" [formControl]="usernameFormControl">
     <mat-label>Username</mat-label>
     <input matInput/>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" [formControl]="emailFormControl">
     <mat-label>Email</mat-label>
     <input matInput/>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" [formControl]="passwordFormControl">
     <mat-label>Password</mat-label>
-    <input matInput/>
+    <input matInput [type]="'password'" />
     </mat-form-field>
 
-    <button mat-raised-button color="primary">Sign Up</button>
+    <mat-form-field appearance="fill" [formControl]="confirmPasswordFormControl">
+    <mat-label>Confirm Password</mat-label>
+    <input matInput [type]="'password'" />
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" (click)="signUp()">Sign Up</button>
 </div>

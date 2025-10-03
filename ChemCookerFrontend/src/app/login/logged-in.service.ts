@@ -35,6 +35,10 @@ export class LoggedInService {
         });
     }
 
+    setToken(token: string) {
+        this.cookieService.set('token', token);
+    }
+
     logout() {
         if (this.cookieService.check('token')) {
             this.cookieService.delete('token');
