@@ -35,8 +35,7 @@ export class AppComponent {
 
   openSignUpDialog() {
     const dialogRef = this.dialog.open(SignUpComponent, {
-      height: '600px',
-      width: '500px',
+
     });
   }
 
