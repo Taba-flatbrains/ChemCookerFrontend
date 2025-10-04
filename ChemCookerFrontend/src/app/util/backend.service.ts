@@ -21,7 +21,7 @@ export class BackendService {
 }
 
 export enum URLS {
-    BackendURL = "http://localhost:3000/api",
+    BackendURL = "http://localhost:8000",
 }
 
 export enum GetRequestTypeUrls {
@@ -49,8 +49,8 @@ export interface LoginRequest {
 
 export interface CreateAccountRequest {
     username: string;
-    password: string;
     email: string;
+    password: string;
 }
 
 export interface CookRequest {

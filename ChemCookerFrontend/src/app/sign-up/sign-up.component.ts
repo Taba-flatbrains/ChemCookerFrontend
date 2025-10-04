@@ -21,10 +21,11 @@ export class SignUpComponent {
       alert("Passwords do not match!"); // todo: better error handling
       return;
     }
+    // todo: check if name, pwd and email are valid
     this.backendService.Post<CreateAccountRequest, CreateAccountResponse>(PostRequestTypeUrls.CreateAccount, {
       username: this.usernameFormControl.value!,
-      password: this.passwordFormControl.value!,
-      email: this.emailFormControl.value!
+      email: this.emailFormControl.value!,
+      password: this.passwordFormControl.value!
     }).subscribe({
       next: (response) => {
         if (response.success) {
