@@ -29,14 +29,15 @@ export class LoggedInService {
             this.LoggedIn = response.valid;
             Subscription(this.LoggedIn);
             // if the token is not valid, delete it
-            if (!this.LoggedIn) {
+            if (!response.valid) {
+                alert(1)
                 this.cookieService.delete('token');
             }
         });
     }
 
     setToken(token: string) {
-        this.cookieService.set('token', token);
+        this.cookieService.set('token', token, 7);
     }
 
     logout() {

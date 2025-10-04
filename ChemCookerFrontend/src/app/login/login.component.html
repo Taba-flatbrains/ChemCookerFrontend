@@ -1,12 +1,12 @@
 <div class="column">
     <mat-form-field appearance="fill">
     <mat-label>Email</mat-label>
-    <input matInput/>
+    <input matInput [formControl]="emailFormControl"/>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
     <mat-label>Password</mat-label>
-    <input matInput [type]="hide() ? 'password' : 'text'" />
+    <input matInput [type]="hide() ? 'password' : 'text'" [formControl]="passwordFormControl"/>
     <button
       matIconButton
       matSuffix
@@ -18,5 +18,5 @@
     </button>
     </mat-form-field>
 
-    <button mat-raised-button color="primary">Login</button>
+    <button mat-raised-button color="primary" (click)="login()">Login</button>
 </div>
