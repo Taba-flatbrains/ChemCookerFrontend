@@ -11,12 +11,12 @@ export class BackendService {
 
   Get<ResponseType>(url : string) : Observable<ResponseType> {
     const headers = new HttpHeaders();
-    return this.http.get<ResponseType>(URLS.BackendURL + url, { headers:headers })
+    return this.http.get<ResponseType>(URLS.BackendURL + url, { headers:headers, withCredentials:true })
   }
 
   Post<RequestType, ResponseType>(url: string, body: RequestType) : Observable<ResponseType> {
     const headers = new HttpHeaders();
-    return this.http.post<ResponseType>(URLS.BackendURL + url, body, { headers:headers })
+    return this.http.post<ResponseType>(URLS.BackendURL + url, body, { headers:headers, withCredentials:true })
   }
 }
 
@@ -43,7 +43,7 @@ export enum PostRequestTypeUrls {
 
 // Request Types
 export interface LoginRequest {
-    username: string;
+    email: string;
     password: string;
 }
 

@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ChemicalComponent } from './chemical/chemical.component';
 import { Chemical } from './chem-bar/chem-bar.component';
@@ -21,7 +21,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(public loggedInService:LoggedInService, private dialog:MatDialog) { }
 
   title = 'ChemCookerFrontend';
@@ -41,5 +41,9 @@ export class AppComponent {
 
   logout() {
     this.loggedInService.logout();
+  }
+
+  ngOnInit(): void {
+    this.loggedInService.UpdateLoggedInStatus()
   }
 }

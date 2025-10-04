@@ -11,8 +11,8 @@ import { LoggedInService } from './logged-in.service';
 export class LoginComponent {
   constructor(private cookieService: CookieService, private backendService:BackendService, private loggedInService:LoggedInService) { }
 
-  login(username: string, password: string) {
-    this.backendService.Post<LoginRequest, LoginResponse>(PostRequestTypeUrls.Login, {username: username, password: password}).subscribe(response => {
+  login(email: string, password: string) {
+    this.backendService.Post<LoginRequest, LoginResponse>(PostRequestTypeUrls.Login, {email: email, password: password}).subscribe(response => {
       if (!response.success) {
         alert("Login failed"); // ersetzen durch schönen error
         return;
