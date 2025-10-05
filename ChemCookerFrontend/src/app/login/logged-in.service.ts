@@ -30,7 +30,6 @@ export class LoggedInService {
             Subscription(this.LoggedIn);
             // if the token is not valid, delete it
             if (!response.valid) {
-                alert(1)
                 this.cookieService.delete('token');
             }
         });

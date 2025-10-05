@@ -30,9 +30,9 @@ export class ChemBarComponent {
   search() {
     if (this.seachFormControl.value == "") { this.clearSearch(); return; }
     switch(this.filter) {
-      case "givenname":
+      case "nickname":
         this.visibleChemicals = this.chemicals.filter(chem => 
-        chem.givenname.toLowerCase().includes(this.seachFormControl.value!)
+        chem.nickname.toLowerCase().includes(this.seachFormControl.value!)
         );
         break;
       case "iupac":
@@ -49,7 +49,7 @@ export class ChemBarComponent {
         this.visibleChemicals = this.chemicals.filter(chem => 
         chem.smile.toLowerCase().includes(this.seachFormControl.value!) || 
         chem.iupac.toLowerCase().includes(this.seachFormControl.value!) || 
-        chem.givenname.toLowerCase().includes(this.seachFormControl.value!)
+        chem.nickname.toLowerCase().includes(this.seachFormControl.value!)
         );
         break;
     }
@@ -61,15 +61,15 @@ export class ChemBarComponent {
   }
 }
 
-export function newChemical(smile: string, iupac: string = "", givenname: string = "", initpos : {x: number, y: number} | undefined = undefined) : Chemical 
+export function newChemical(smile: string, iupac: string = "", nickname: string = "", initpos : {x: number, y: number} | undefined = undefined) : Chemical 
 {
-  return {smile: smile, iupac: iupac, givenname: givenname, initpos: initpos, key: crypto.randomUUID()};
+  return {smile: smile, iupac: iupac, nickname: nickname, initpos: initpos, key: crypto.randomUUID()};
 }
 
 export interface Chemical {
   smile: string;
   iupac: string;
-  givenname: string;
+  nickname: string;
   initpos : {x: number, y: number} | undefined;
-  key : string;
+  key : string | undefined;
 }

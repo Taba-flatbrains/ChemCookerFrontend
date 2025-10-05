@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
+import { Chemical } from '../chem-bar/chem-bar.component';
 
 @Injectable({
     providedIn: 'root'
@@ -104,6 +105,6 @@ export interface AvailableSkillpointsResponse {
 }
 
 export interface AvailableChemicalsResponse {
-    chemicals: string[]; // array of smiles
+    chemicals: Chemical[]; 
 }
 

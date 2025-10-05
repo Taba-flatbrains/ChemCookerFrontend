@@ -15,7 +15,7 @@ import { Chemical, newChemical } from '../chem-bar/chem-bar.component';
 export class ChemicalComponent implements AfterViewInit, OnInit {
   @Input() smile : string = "C1C2CC3CC1CC(C2)C3";
   @Input() iupac : string = "tricyclo["
-  @Input() givenname : string = "Adamantane";
+  @Input() nickname : string = "Adamantane";
   @Input() draggable : boolean = true;
   @Input() initialPosition : {x: number, y: number} | undefined;
   @Input() ChemicalsInAction : Chemical[] = [];
@@ -95,7 +95,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
 
   duplicate(event : MouseEvent) {
     if(this.draggable) return;
-    this.ChemicalsInAction.push(newChemical(this.smile, this.iupac, this.givenname, {x: event.clientX - this.rect.width / 2, y: event.clientY - this.rect.height / 2}));
+    this.ChemicalsInAction.push(newChemical(this.smile, this.iupac, this.nickname, {x: event.clientX - this.rect.width / 2, y: event.clientY - this.rect.height / 2}));
   }
 }
 
