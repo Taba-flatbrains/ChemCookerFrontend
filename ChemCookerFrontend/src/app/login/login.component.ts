@@ -26,6 +26,7 @@ export class LoginComponent {
       }
       this.cookieService.set('token', response.token, 7);
       this.loggedInService.LoggedIn = true;
+      this.loggedInService.LoggedInStatusChangeEvent.next(true)
       this.dialogRef.close()
     });
   }
