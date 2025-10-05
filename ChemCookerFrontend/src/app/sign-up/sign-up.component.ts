@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LoggedInService } from '../login/logged-in.service';
 import { BackendService, CreateAccountRequest, CreateAccountResponse, PostRequestTypeUrls } from '../util/backend.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,7 +10,7 @@ import { BackendService, CreateAccountRequest, CreateAccountResponse, PostReques
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent {
-  constructor(private loggedInService:LoggedInService, private backendService:BackendService) { }
+  constructor(private loggedInService:LoggedInService, private backendService:BackendService, private dialogRef:MatDialogRef<SignUpComponent>) { }
 
   usernameFormControl = new FormControl('');
   emailFormControl = new FormControl('');
@@ -31,6 +32,7 @@ export class SignUpComponent {
         if (response.success) {
           this.loggedInService.LoggedIn = true;
           this.loggedInService.setToken(response.token);
+          this.dialogRef.close()
         } else {
           alert("Account creation failed: "); // todo: better error handling
         }
