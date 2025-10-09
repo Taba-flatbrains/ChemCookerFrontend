@@ -36,7 +36,6 @@ export enum PostRequestTypeUrls {
     CreateAccount = "/signup",
     Login = "/login",
     Cook = "/cook",
-    SubmitReaction = "/submitreaction",
     NicknameChemical = "/nicknamechemical",
     UseSkillpoint = "/useskillpoint",
 }
