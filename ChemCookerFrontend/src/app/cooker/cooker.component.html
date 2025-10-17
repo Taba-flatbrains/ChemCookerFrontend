@@ -1,0 +1,17 @@
+<div class="cooker-container" [ngStyle]="{'background-image': 'url('+backgroundImage+')'}">
+    <mat-form-field>
+        <mat-label>Temperature</mat-label>
+        <mat-select [formControl]="tempFormControl">
+            <mat-option value="1">Cold</mat-option>
+            <mat-option value="10">Room Temp</mat-option>
+            <mat-option value="100">Reflux</mat-option>
+            <mat-option value="1000">Pyrolysis</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-slide-toggle [formControl]="uvFormControl" style="align-self: center;">UV</mat-slide-toggle>
+
+    <button mat-raised-button color="primary">Cook</button>
+
+    <button mat-raised-button color="accent">Clear</button>
+</div>

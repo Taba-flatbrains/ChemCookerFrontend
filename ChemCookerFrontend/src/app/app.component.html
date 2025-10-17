@@ -7,6 +7,7 @@
         <div *ngFor="let chemical of ChemicalsInAction">
             <chemical *ngIf="chemical" [IndexInCIA]="ChemicalsInAction.indexOf(chemical)" [smile]="chemical.smile" [nickname]="chemical.nickname" [iupac]="chemical.iupac" [initialPosition]="chemical.initpos"></chemical>
         </div>
+        <app-cooker class="cooker"></app-cooker>
     </div>
     <app-chem-bar [ChemicalsInAction]="ChemicalsInAction"></app-chem-bar>
 </div>

@@ -22,6 +22,8 @@ import { LoggedInService } from './login/logged-in.service';
 import { BackendService } from './util/backend.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { CookerComponent } from './cooker/cooker.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     ChemicalComponent,
     ChemBarComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    CookerComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     MatIconModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSlideToggleModule
 ],
   providers: [LoggedInService, BackendService],
   bootstrap: [AppComponent]
