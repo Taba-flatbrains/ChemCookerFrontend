@@ -1,6 +1,7 @@
 .cooker-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 45px;
+  gap: 8px;
+  padding: 80px;
+  background-size: contain;
 }
