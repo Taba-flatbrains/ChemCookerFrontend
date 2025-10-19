@@ -55,15 +55,8 @@ export interface CreateAccountRequest {
 
 export interface CookRequest {
     chemicals: string[]; // array of smiles
-    temperature: string;
-    hv: string;
-}
-
-export interface SubmitReactionRequest {
-    reactants: string[]; // array of smiles
-    products: string[]; // array of smiles
-    temperature: string;
-    hv: string;
+    temp: number;
+    uv: boolean;
 }
 
 export interface NicknameChemicalRequest {
@@ -88,11 +81,7 @@ export interface CreateAccountResponse { // same as login response
 
 export interface CookResponse {
     success: boolean;
-    products: string[]; // array of smiles
-}
-
-export interface SubmitReactionResponse {
-    success: boolean;
+    products: Chemical[]; // array of smiles
 }
 
 export interface NicknameChemicalResponse {

@@ -87,6 +87,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
 
   checkInCooker() {
     // add condition
+    if (!this.box) { return; }
     if (!intersectRect(this.chemService.cookerRect!, this.box!.nativeElement.getBoundingClientRect())) {
       return;
     }

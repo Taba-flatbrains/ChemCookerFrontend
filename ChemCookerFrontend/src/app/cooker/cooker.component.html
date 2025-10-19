@@ -11,7 +11,7 @@
 
     <mat-slide-toggle [formControl]="uvFormControl" style="align-self: center;">UV</mat-slide-toggle>
 
-    <button mat-raised-button color="primary">Cook</button>
+    <button mat-raised-button color="primary" (click)="submit()">Cook</button>
 
-    <button mat-raised-button color="accent">Clear</button>
+    <button mat-raised-button color="accent" (click)="clear()">Clear</button>
 </div>
