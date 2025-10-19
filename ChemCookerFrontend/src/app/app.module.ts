@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CookerComponent } from './cooker/cooker.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { ChemicalsService } from './chemical/chemicals.service';
 
 
 @NgModule({
@@ -50,7 +51,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatDialogModule,
     MatSlideToggleModule
 ],
-  providers: [LoggedInService, BackendService],
+  providers: [LoggedInService, BackendService, ChemicalsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
