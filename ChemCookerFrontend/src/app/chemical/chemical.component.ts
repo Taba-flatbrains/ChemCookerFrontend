@@ -5,6 +5,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {RDKitModule} from '@rdkit/rdkit';
 import { first, Observable, ReplaySubject } from 'rxjs';
 import { Chemical, newChemical } from '../chem-bar/chem-bar.component';
+import { ChemicalsService } from './chemicals.service';
 
 @Component({
   selector: 'chemical',
@@ -28,7 +29,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   svg : undefined | SafeHtml;
   active : boolean = true;
 
-  constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef) {
+  constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef, private chemService:ChemicalsService) {
   }
 
   @ViewChild('box') box : ElementRef | undefined;
@@ -37,7 +38,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
     if(this.draggable && this.initialPosition) {
       this.Style = {'position': 'absolute', 'top.px': this.initialPosition.y, 'left.px': this.initialPosition.x};
       this.ManualDragging = true;
-      addEventListener("mouseup", (event) => { this.ManualDragging = false; this.checkOutOfBounds(); });
+      addEventListener("mouseup", (event) => { this.ManualDragging = false; this.checkOutOfBounds(); this.checkInCooker(); });
       addEventListener("mousemove", (event) => {
         if(this.ManualDragging) {
           this.initialPosition = {x: event.clientX - this.rect.width / 2, y: event.clientY - this.rect.height / 2};
@@ -81,6 +82,17 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   dragEnd($event: CdkDragEnd) {
     this.position = $event.source.getFreeDragPosition();
     this.checkOutOfBounds();
+    this.checkInCooker();
+  }
+
+  checkInCooker() {
+    // add condition
+    if (!intersectRect(this.chemService.cookerRect!, this.box!.nativeElement.getBoundingClientRect())) {
+      return;
+    }
+
+    this.active = false;
+    this.chemService.cookerChemicals.push(this.smile);
   }
 
   checkOutOfBounds() {
@@ -127,3 +139,12 @@ export class RDKitLoaderService implements OnDestroy {
     return this.rdkitSubject$.asObservable().pipe(first());
   }
 }
+
+function intersectRect (rectA : DOMRect, rectB : DOMRect) : boolean { // credits: https://github.com/Barry127/intersect-rect/blob/master/intersect-rect.js
+    return !(
+        rectB.left >= rectA.right ||
+        rectB.right <= rectA.left ||
+        rectB.top >= rectA.bottom ||
+        rectB.bottom <= rectA.top
+      );
+  }
