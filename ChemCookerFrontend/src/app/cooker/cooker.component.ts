@@ -33,6 +33,8 @@ export class CookerComponent implements OnInit{
         this.chemService.unlockedChemicals.push(...response.new_chems); 
         for (var chem of response.products) {
           chem.initpos = this.el.nativeElement.getBoundingClientRect(); 
+          chem.initpos!.x += Math.random() * this.el.nativeElement.getBoundingClientRect().width - 50;
+          chem.initpos!.y += Math.random() * this.el.nativeElement.getBoundingClientRect().width; - 50;
           this.chemService.chemicalsInAction.push(chem)
         }
       }

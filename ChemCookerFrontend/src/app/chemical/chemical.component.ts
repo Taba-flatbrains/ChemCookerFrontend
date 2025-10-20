@@ -36,6 +36,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     if(this.draggable && this.initialPosition) {
       this.Style = {'position': 'absolute', 'top.px': this.initialPosition.y, 'left.px': this.initialPosition.x};
+      if (!this.self?.dragOnCreate) return;
       this.ManualDragging = true;
       addEventListener("mouseup", (event) => { this.ManualDragging = false; this.checkOutOfBounds(); this.checkInCooker(); });
       addEventListener("mousemove", (event) => {
@@ -107,7 +108,8 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
 
   duplicate(event : MouseEvent) {
     if(this.draggable) return;
-    this.chemService.chemicalsInAction.push(newChemical(this.smile, this.iupac, this.nickname, {x: event.clientX - this.rect.width / 2, y: event.clientY - this.rect.height / 2}));
+    this.chemService.chemicalsInAction.push(newChemical(this.smile, this.iupac, this.nickname, 
+      {x: event.clientX - this.rect.width / 2, y: event.clientY - this.rect.height / 2}, true));
   }
 
   removeSelf() {
