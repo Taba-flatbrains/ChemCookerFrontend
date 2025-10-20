@@ -19,7 +19,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   @Input() nickname : string = "Adamantane";
   @Input() draggable : boolean = true;
   @Input() initialPosition : {x: number, y: number} | undefined;
-  @Input() IndexInCIA : number | undefined;
+  @Input() self : Chemical | undefined;
   Style : { [klass: string]: any; } = {};
 
   @Output() position : {x: number, y: number} | undefined;
@@ -91,7 +91,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
       return;
     }
 
-    this.active = false;
+    this.removeSelf()
     this.chemService.cookerChemicals.push(this.smile);
   }
 
@@ -101,13 +101,21 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
     }
     if (!this.initialPosition) { return;}
     if(this.position.y + this.initialPosition.y + this.rect.height / 2 > window.innerHeight - Math.max(90, Math.min(window.innerWidth * 16 + 30, window.innerHeight * 0.35))) {
-      this.active = false; // non optimal solution
+      this.removeSelf()
     }
   }
 
   duplicate(event : MouseEvent) {
     if(this.draggable) return;
     this.chemService.chemicalsInAction.push(newChemical(this.smile, this.iupac, this.nickname, {x: event.clientX - this.rect.width / 2, y: event.clientY - this.rect.height / 2}));
+  }
+
+  removeSelf() {
+    const index = this.chemService.chemicalsInAction.indexOf(this.self!, 0);
+    if (index > -1) {
+      this.chemService.chemicalsInAction.splice(index, 1);
+    }
+    
   }
 }
 

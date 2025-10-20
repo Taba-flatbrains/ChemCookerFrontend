@@ -5,7 +5,7 @@
         <button mat-button class="button" *ngIf="loggedInService.LoggedIn" (click)="logout()">Logout</button>
         <!-- Todo: add skilltree, quests, and current quest -->
         <div *ngFor="let chemical of chemService.chemicalsInAction">
-            <chemical *ngIf="chemical" [IndexInCIA]="chemService.chemicalsInAction.indexOf(chemical)" [smile]="chemical.smile" [nickname]="chemical.nickname" [iupac]="chemical.iupac" [initialPosition]="chemical.initpos"></chemical>
+            <chemical *ngIf="chemical" [self]="chemical" [smile]="chemical.smile" [nickname]="chemical.nickname" [iupac]="chemical.iupac" [initialPosition]="chemical.initpos"></chemical>
         </div>
         <app-cooker class="cooker"></app-cooker>
     </div>
