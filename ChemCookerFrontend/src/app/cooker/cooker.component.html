@@ -16,5 +16,5 @@
     <button mat-raised-button color="accent" (click)="clear()">Clear</button>
 
     <app-tiny-chemical [smile]="smile" *ngFor="let smile of chemService.cookerChemicals" class="tiny-chem"
-    [ngStyle]="{'top':chemService.cookerRect!.top+chemService.cookerRect!.height/2, 'height':chemService.cookerRect!.left+chemService.cookerRect!.width/2}"></app-tiny-chemical>
+    [ngStyle]="{'top':chemService.cookerRect!.height/2+'px', 'left':chemService.cookerRect!.width/2+'px'}"></app-tiny-chemical>
 </div>

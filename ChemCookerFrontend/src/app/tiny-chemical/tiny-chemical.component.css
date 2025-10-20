@@ -1,0 +1,8 @@
+.svg {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: white;
+    padding: 3px;
+    border-radius: 3px;
+}
