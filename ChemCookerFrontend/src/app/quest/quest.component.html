@@ -1,1 +1,7 @@
-<p>quest works!</p>
+<div class="box">  
+    <div class="svg" [innerHTML]="svg"></div>
+    <p *ngIf="self.reward_skillpoints > 0 || self.reward_misc">Reward:</p>
+    <p *ngIf="self.reward_skillpoints == 1">{{self.reward_skillpoints + "Skillpoint"}}</p>
+    <p *ngIf="self.reward_skillpoints > 1">{{self.reward_skillpoints + "Skillpoints"}}</p>
+    <p *ngIf="self.reward_misc">Misc: {{self.reward_misc}}</p>
+</div>  

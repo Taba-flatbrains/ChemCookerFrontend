@@ -25,7 +25,7 @@ import { QuestService } from './quest/quest.service';
 })
 export class AppComponent implements OnInit {
   constructor(public loggedInService:LoggedInService, private dialog:MatDialog, public chemService:ChemicalsService,
-    private questService:QuestService
+    public questService:QuestService
   ) { }
 
   title = 'ChemCookerFrontend';
@@ -40,6 +40,14 @@ export class AppComponent implements OnInit {
     const dialogRef = this.dialog.open(SignUpComponent, {
 
     });
+  }
+
+
+  openSkilltreeDialog() {
+  throw new Error('Method not implemented.');
+  }
+  openQuestDialog() {
+  throw new Error('Method not implemented.');
   }
 
   logout() {

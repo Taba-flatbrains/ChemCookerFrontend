@@ -20,3 +20,21 @@
   top: 40%;
   transform: translate(-50%, -50%);
 }
+
+.header{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
+.quest-and-skilltree-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.account-management-buttons {
+  display: flex;
+  flex-direction: column;
+}

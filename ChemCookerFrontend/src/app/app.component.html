@@ -1,8 +1,18 @@
 <div class="flex-column">
     <div class="action-space">
-        <button mat-button class="button" *ngIf="!loggedInService.LoggedIn" (click)="openLoginDialog()">Login</button>
-        <button mat-button class="button" *ngIf="!loggedInService.LoggedIn" (click)="openSignUpDialog()">Sign up</button>
-        <button mat-button class="button" *ngIf="loggedInService.LoggedIn" (click)="logout()">Logout</button>
+        <div class="header">
+            <div class="account-management-buttons">
+                <button mat-button class="button" *ngIf="!loggedInService.LoggedIn" (click)="openLoginDialog()">Login</button>
+                <button mat-button class="button" *ngIf="!loggedInService.LoggedIn" (click)="openSignUpDialog()">Sign up</button>
+                <button mat-button class="button" *ngIf="loggedInService.LoggedIn" (click)="logout()">Logout</button>
+            </div>
+
+            <div class="quest-and-skilltree-buttons" *ngIf="loggedInService.LoggedIn">
+                <app-quest [self]="questService.getQuestById(questService.selectedQuest)"></app-quest>
+                <button mat-button class="button" (click)="openQuestDialog()">Quests</button>
+                <button mat-button class="button" (click)="openSkilltreeDialog()">Skilltree</button>
+            </div>
+        </div>
         <!-- Todo: add skilltree, quests, and current quest -->
         <div *ngFor="let chemical of chemService.chemicalsInAction">
             <chemical *ngIf="chemical" [self]="chemical" [smile]="chemical.smile" [nickname]="chemical.nickname" [iupac]="chemical.iupac" [initialPosition]="chemical.initpos"></chemical>
