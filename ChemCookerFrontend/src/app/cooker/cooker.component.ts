@@ -9,7 +9,7 @@ import { BackendService, CookRequest, CookResponse, PostRequestTypeUrls } from '
   styleUrls: ['./cooker.component.css']
 })
 export class CookerComponent implements OnInit{
-  constructor(private el: ElementRef, private render: Renderer2, private chemService:ChemicalsService, private backendService:BackendService) { }
+  constructor(private el: ElementRef, private render: Renderer2, public chemService:ChemicalsService, private backendService:BackendService) { }
 
 
   ngOnInit() {
