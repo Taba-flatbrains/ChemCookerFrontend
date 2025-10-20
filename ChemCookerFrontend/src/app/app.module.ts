@@ -26,6 +26,7 @@ import { CookerComponent } from './cooker/cooker.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ChemicalsService } from './chemical/chemicals.service';
 import { TinyChemicalComponent } from './tiny-chemical/tiny-chemical.component';
+import { QuestComponent } from './quest/quest.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { TinyChemicalComponent } from './tiny-chemical/tiny-chemical.component';
     LoginComponent,
     SignUpComponent,
     CookerComponent,
-    TinyChemicalComponent
+    TinyChemicalComponent,
+    QuestComponent
   ],
   imports: [
     BrowserModule,

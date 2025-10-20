@@ -3,6 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
 import { Chemical } from '../chem-bar/chem-bar.component';
+import { Quest } from '../quest/quest.component';
 
 @Injectable({
     providedIn: 'root'
@@ -30,6 +31,7 @@ export enum GetRequestTypeUrls {
     GetAvailableChemicals = "/availablechems",
     GetAvailableSkillpoints = "/availableskillpoints",
     ValidateToken = "/validatetoken",
+    GetAllQuests = "/all-quests",
 }
 
 export enum PostRequestTypeUrls {
@@ -83,6 +85,8 @@ export interface CookResponse {
     success: boolean;
     products: Chemical[]; 
     new_chems: Chemical[];
+    skillpoints_gained: number;
+    quests_completed: number[]; // array of quest IDs
 }
 
 export interface NicknameChemicalResponse {
@@ -95,5 +99,10 @@ export interface AvailableSkillpointsResponse {
 
 export interface AvailableChemicalsResponse {
     chemicals: Chemical[]; 
+}
+
+export interface GetAllQuestsResponse {
+    quests: Quest[];
+    completed_quests: number[]; // array of quest IDs
 }
 

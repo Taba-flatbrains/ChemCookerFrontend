@@ -15,6 +15,7 @@ import {
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ChemicalsService } from './chemical/chemicals.service';
+import { QuestService } from './quest/quest.service';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,9 @@ import { ChemicalsService } from './chemical/chemicals.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(public loggedInService:LoggedInService, private dialog:MatDialog, public chemService:ChemicalsService) { }
+  constructor(public loggedInService:LoggedInService, private dialog:MatDialog, public chemService:ChemicalsService,
+    private questService:QuestService
+  ) { }
 
   title = 'ChemCookerFrontend';
 
@@ -45,5 +48,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loggedInService.UpdateLoggedInStatus()
+    this.questService.updateQuests();
   }
 }
