@@ -14,6 +14,7 @@ import {
 } from '@angular/material/dialog';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ChemicalsService } from './chemical/chemicals.service';
 
 @Component({
   selector: 'app-root',
@@ -22,10 +23,9 @@ import { SignUpComponent } from './sign-up/sign-up.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(public loggedInService:LoggedInService, private dialog:MatDialog) { }
+  constructor(public loggedInService:LoggedInService, private dialog:MatDialog, public chemService:ChemicalsService) { }
 
   title = 'ChemCookerFrontend';
-  ChemicalsInAction : Chemical[] = [];
 
   openLoginDialog() {
     const dialogRef = this.dialog.open(LoginComponent, {

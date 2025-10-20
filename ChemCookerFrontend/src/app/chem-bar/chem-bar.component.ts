@@ -23,7 +23,6 @@ export class ChemBarComponent implements OnInit{
     })
   }
 
-  @Input() ChemicalsInAction : Chemical[] = [];
   visibleChemicals : Chemical[] = this.chemicalsService.unlockedChemicals;
 
   onWheel(event: WheelEvent): void {

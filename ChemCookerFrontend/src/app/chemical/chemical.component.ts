@@ -19,7 +19,6 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   @Input() nickname : string = "Adamantane";
   @Input() draggable : boolean = true;
   @Input() initialPosition : {x: number, y: number} | undefined;
-  @Input() ChemicalsInAction : Chemical[] = [];
   @Input() IndexInCIA : number | undefined;
   Style : { [klass: string]: any; } = {};
 
@@ -108,7 +107,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
 
   duplicate(event : MouseEvent) {
     if(this.draggable) return;
-    this.ChemicalsInAction.push(newChemical(this.smile, this.iupac, this.nickname, {x: event.clientX - this.rect.width / 2, y: event.clientY - this.rect.height / 2}));
+    this.chemService.chemicalsInAction.push(newChemical(this.smile, this.iupac, this.nickname, {x: event.clientX - this.rect.width / 2, y: event.clientY - this.rect.height / 2}));
   }
 }
 
