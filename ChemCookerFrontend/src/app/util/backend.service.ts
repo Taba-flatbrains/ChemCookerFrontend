@@ -81,7 +81,8 @@ export interface CreateAccountResponse { // same as login response
 
 export interface CookResponse {
     success: boolean;
-    products: Chemical[]; // array of smiles
+    products: Chemical[]; 
+    new_chems: Chemical[];
 }
 
 export interface NicknameChemicalResponse {

@@ -30,7 +30,11 @@ export class CookerComponent implements OnInit{
       uv: this.uvFormControl.value!
     }).subscribe(response => {
       if (response.success) {
-        this.chemService.unlockedChemicals.push(...response.products); // todo: make products appear in action space
+        this.chemService.unlockedChemicals.push(...response.new_chems); 
+        for (var chem of response.products) {
+          chem.initpos = this.el.nativeElement.getBoundingClientRect(); 
+          this.chemService.chemicalsInAction.push(chem)
+        }
       }
     });
   }
