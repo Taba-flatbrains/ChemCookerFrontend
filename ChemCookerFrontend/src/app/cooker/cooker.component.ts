@@ -20,13 +20,13 @@ export class CookerComponent implements OnInit{
 
   backgroundImage : string = 'assets/pot.webp';  // todo: add diferent styles
 
-  tempFormControl = new FormControl(10);
+  tempFormControl = new FormControl("10");
   uvFormControl = new FormControl(false);
 
   submit() {
     this.backendService.Post<CookRequest, CookResponse>(PostRequestTypeUrls.Cook, {
       chemicals: this.chemService.cookerChemicals,
-      temp: this.tempFormControl.value!,
+      temp: +this.tempFormControl.value!,
       uv: this.uvFormControl.value!
     }).subscribe(response => {
       if (response.success) {
