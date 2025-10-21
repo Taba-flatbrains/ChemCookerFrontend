@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RDKitModule } from '@rdkit/rdkit';
 import { RDKitLoaderService } from '../chemical/chemical.component';
@@ -9,7 +9,7 @@ import { QuestService } from './quest.service';
   templateUrl: './quest.component.html',
   styleUrls: ['./quest.component.css']
 })
-export class QuestComponent {
+export class QuestComponent implements AfterViewInit, OnChanges {
   constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef,
     private questService: QuestService
   ) {}
@@ -38,6 +38,10 @@ export class QuestComponent {
       )
     }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.ngAfterViewInit();
+  }
+
   size : {width: number, height: number} = {width: 50, height: 50};
   EstimateSize(smile: string): {width: number, height: number} {
     let letters_only = smile.replace(/[^A-Za-z]/g, '');
@@ -60,7 +64,7 @@ export class QuestComponent {
   }
 
   selectQuest() {
-    this.questService.selectedQuest = this.self.id;
+    this.questService.changeCurrentQuest(this.self.id);
   }
 }
 
