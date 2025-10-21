@@ -1,6 +1,7 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnInit } from "@angular/core";
 import { BackendService, GetAllQuestsResponse, GetRequestTypeUrls } from "../util/backend.service";
 import { Quest, QuestConditionTypes } from "./quest.component";
+import { LoggedInService } from "../login/logged-in.service";
 
 
 @Injectable({
@@ -16,10 +17,10 @@ export class QuestService {
         reward_skillpoints: 1,
         reward_misc: null,
         condition_type: QuestConditionTypes.ObtainChemical,
-        condition_value: "CC(=O)C"
+        condition_value: "CCOCC"
     }];
 
-    selectedQuest: number = 0;
+    selectedQuest: number = 1;
 
     updateQuests() {
         this.backendService.Get<GetAllQuestsResponse>(GetRequestTypeUrls.GetAllQuests).subscribe(response => {
@@ -35,12 +36,12 @@ export class QuestService {
             }
         }
         return {
-            id: 1,
+            id: 0,
             description: "Big Chongus amongus",
             reward_skillpoints: 1,
             reward_misc: null,
             condition_type: QuestConditionTypes.ObtainChemical,
-            condition_value: "CC(=O)C"
+            condition_value: "CC(=O)CC"
         };
     }
 }

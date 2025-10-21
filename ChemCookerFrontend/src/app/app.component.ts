@@ -55,7 +55,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loggedInService.UpdateLoggedInStatus()
     this.questService.updateQuests();
+    this.loggedInService.LoggedInStatusChangeEvent.subscribe(() => {
+        this.questService.updateQuests()
+    })
+    this.loggedInService.UpdateLoggedInStatus()
   }
 }
