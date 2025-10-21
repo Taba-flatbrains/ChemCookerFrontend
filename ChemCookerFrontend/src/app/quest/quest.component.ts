@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RDKitModule } from '@rdkit/rdkit';
 import { RDKitLoaderService } from '../chemical/chemical.component';
+import { QuestService } from './quest.service';
 
 @Component({
   selector: 'app-quest',
@@ -9,7 +10,9 @@ import { RDKitLoaderService } from '../chemical/chemical.component';
   styleUrls: ['./quest.component.css']
 })
 export class QuestComponent {
-  constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef) {}
+  constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef,
+    private questService: QuestService
+  ) {}
 
   qctypes = QuestConditionTypes; // for html access
 
@@ -54,6 +57,10 @@ export class QuestComponent {
 
     this.size = {width: width, height: height};
     return {width: width, height: height};
+  }
+
+  selectQuest() {
+    this.questService.selectedQuest = this.self.id;
   }
 }
 
