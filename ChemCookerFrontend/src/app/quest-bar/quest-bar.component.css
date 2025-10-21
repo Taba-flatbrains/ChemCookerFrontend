@@ -1,0 +1,5 @@
+.quest-container {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+}

@@ -44,5 +44,9 @@ export class QuestService {
             condition_value: "CC(=O)CC"
         };
     }
+
+    getCurrentQuest() {
+        return this.getQuestById(this.selectedQuest);
+    }
 }
 
