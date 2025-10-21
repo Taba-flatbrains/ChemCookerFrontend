@@ -17,6 +17,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { ChemicalsService } from './chemical/chemicals.service';
 import { QuestService } from './quest/quest.service';
 import { QuestBarComponent } from './quest-bar/quest-bar.component';
+import { SkilltreeComponent } from './skilltree/skilltree.component';
 
 @Component({
   selector: 'app-root',
@@ -45,7 +46,9 @@ export class AppComponent implements OnInit {
 
 
   openSkilltreeDialog() {
-  throw new Error('Method not implemented.');
+    const dialogRef = this.dialog.open(SkilltreeComponent, {
+
+    });
   }
   openQuestDialog() {
     const dialogRef = this.dialog.open(QuestBarComponent, {

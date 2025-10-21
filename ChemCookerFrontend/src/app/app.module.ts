@@ -28,6 +28,7 @@ import { ChemicalsService } from './chemical/chemicals.service';
 import { TinyChemicalComponent } from './tiny-chemical/tiny-chemical.component';
 import { QuestComponent } from './quest/quest.component';
 import { QuestBarComponent } from './quest-bar/quest-bar.component';
+import { SkilltreeComponent } from './skilltree/skilltree.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { QuestBarComponent } from './quest-bar/quest-bar.component';
     CookerComponent,
     TinyChemicalComponent,
     QuestComponent,
-    QuestBarComponent
+    QuestBarComponent,
+    SkilltreeComponent
   ],
   imports: [
     BrowserModule,
