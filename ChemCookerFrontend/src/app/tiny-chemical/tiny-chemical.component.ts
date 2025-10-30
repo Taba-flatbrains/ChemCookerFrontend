@@ -14,6 +14,7 @@ export class TinyChemicalComponent implements AfterViewInit {
   }
 
   @Input() smile : string = "C1C2CC3CC1CC(C2)C3";
+  @Input() disableAnimation : boolean = false;
   svg : undefined | SafeHtml;
 
   ngAfterViewInit() {
@@ -42,6 +43,7 @@ export class TinyChemicalComponent implements AfterViewInit {
 
   pos : {left: string, top: string} = {left: '0px', top: '0px'};
   CalcPos() {
+    if (this.disableAnimation) return {"x":0, "y":0}
     let x : number = this.size.width/ 2 + 3;
     let y : number = this.size.height / 2 + 3;
     this.pos = {left: -x+'px', top: -y+'px'}
@@ -52,6 +54,7 @@ export class TinyChemicalComponent implements AfterViewInit {
   distanceFromCenter = 150;
   velocityMultiplier = 0.005;
   Animate() {
+    if (this.disableAnimation) return;
     this.ticks++;
     var pos = this.CalcPos();
     this.pos.left = pos.x + Math.sin(this.ticks * this.velocityMultiplier)*this.distanceFromCenter + 'px';

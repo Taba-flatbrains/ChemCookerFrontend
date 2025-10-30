@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
 import { Chemical } from '../chem-bar/chem-bar.component';
 import { Quest } from '../quest/quest.component';
+import { SkilltreeNode } from '../skilltree-node/skilltree-node.component';
 
 @Injectable({
     providedIn: 'root'
@@ -104,5 +105,10 @@ export interface AvailableChemicalsResponse {
 export interface GetAllQuestsResponse {
     quests: Quest[];
     completed_quests: number[]; // array of quest IDs
+}
+
+export interface GetSkilltreeResponse {
+  skilltree_nodes : SkilltreeNode[]
+  unlocked_skilltree_nodes : number[]
 }
 

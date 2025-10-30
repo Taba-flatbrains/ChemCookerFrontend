@@ -29,6 +29,7 @@ import { TinyChemicalComponent } from './tiny-chemical/tiny-chemical.component';
 import { QuestComponent } from './quest/quest.component';
 import { QuestBarComponent } from './quest-bar/quest-bar.component';
 import { SkilltreeComponent } from './skilltree/skilltree.component';
+import { SkilltreeNodeComponent } from './skilltree-node/skilltree-node.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { SkilltreeComponent } from './skilltree/skilltree.component';
     TinyChemicalComponent,
     QuestComponent,
     QuestBarComponent,
-    SkilltreeComponent
+    SkilltreeComponent,
+    SkilltreeNodeComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { SkilltreeComponent } from './skilltree/skilltree.component';
     MatIconModule,
     HttpClientModule,
     MatDialogModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    
 ],
   providers: [LoggedInService, BackendService, ChemicalsService],
   bootstrap: [AppComponent]
