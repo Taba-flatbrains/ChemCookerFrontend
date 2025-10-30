@@ -31,6 +31,7 @@ import { QuestBarComponent } from './quest-bar/quest-bar.component';
 import { SkilltreeComponent } from './skilltree/skilltree.component';
 import { SkilltreeNodeComponent } from './skilltree-node/skilltree-node.component';
 
+import { DragScrollComponent, DragScrollItemDirective } from 'ngx-drag-scroll';
 
 @NgModule({
   declarations: [
@@ -52,15 +53,15 @@ import { SkilltreeNodeComponent } from './skilltree-node/skilltree-node.componen
     CdkDrag,
     CdkScrollable,
     ReactiveFormsModule,
-    MatFormFieldModule, 
-    MatInputModule, 
+    MatFormFieldModule,
+    MatInputModule,
     MatSelectModule, BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
     HttpClientModule,
     MatDialogModule,
     MatSlideToggleModule,
-    
+    DragScrollComponent
 ],
   providers: [LoggedInService, BackendService, ChemicalsService],
   bootstrap: [AppComponent]

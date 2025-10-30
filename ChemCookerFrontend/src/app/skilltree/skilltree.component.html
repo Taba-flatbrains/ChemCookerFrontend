@@ -1,9 +1,11 @@
-
+<drag-scroll style="width: 300px; height: 300px;">
     <div class="flex-column">
-            <div class="flex-row" *ngFor="let y of range(-1, 10)">
-                <div *ngFor="let x of range(-10, 10)">
-                    <app-skilltree-node [self]="getNodeFromPos(x, y)!" [unlocked]="unlockedSkilltreeNodes.includes(getNodeFromPos(x, y)!.id)"
-                    *ngIf="getNodeFromPos(x, y)"></app-skilltree-node>
-                </div>
+        <div class="flex-row" *ngFor="let y of range(-1, 10)">
+            <div *ngFor="let x of range(-10, 10)">
+                <app-skilltree-node [self]="getNodeFromPos(x, y)!" [unlocked]="unlockedSkilltreeNodes.includes(getNodeFromPos(x, y)!.id)"
+                *ngIf="getNodeFromPos(x, y)"></app-skilltree-node>
+                <p>agehohoaegoaefbhuoaefbiagbiuavgibuvpaedbijpvad</p>
             </div>
+        </div>
     </div>
+</drag-scroll>
