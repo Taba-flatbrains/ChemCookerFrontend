@@ -1,16 +1,17 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-skilltree-node',
   templateUrl: './skilltree-node.component.html',
   styleUrls: ['./skilltree-node.component.css']
 })
-export class SkilltreeNodeComponent implements OnInit{
+export class SkilltreeNodeComponent implements AfterViewInit{
   constructor (private el:ElementRef) {}
 
-  ngOnInit(): void {
-    if (this.centerOnLoad)
-    this.el.nativeElement.scrollIntoView();
+  ngAfterViewInit(): void {
+    if (this.centerOnLoad) {
+      this.el.nativeElement.scrollIntoView();
+    }
   }
   @Input() self !: SkilltreeNode
   @Input() unlocked !: boolean
