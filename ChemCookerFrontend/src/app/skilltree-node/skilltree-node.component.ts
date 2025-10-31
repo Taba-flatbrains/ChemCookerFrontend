@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-skilltree-node',
@@ -6,11 +6,15 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./skilltree-node.component.css']
 })
 export class SkilltreeNodeComponent implements OnInit{
+  constructor (private el:ElementRef) {}
+
   ngOnInit(): void {
-    
+    if (this.centerOnLoad)
+    this.el.nativeElement.scrollIntoView();
   }
   @Input() self !: SkilltreeNode
   @Input() unlocked !: boolean
+  @Input() centerOnLoad = false
 }
 
 export interface SkilltreeNode {

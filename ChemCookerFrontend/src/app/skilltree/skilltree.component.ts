@@ -30,8 +30,6 @@ export class SkilltreeComponent implements OnInit {
       this.unlockedSkilltreeNodes = r.unlocked_skilltree_nodes;
     });
   }
-  // todo: center on last unlocked skillnode
-  
 }
 
 function range(start:number, stop:number | undefined = undefined, step:number | undefined = undefined) {
