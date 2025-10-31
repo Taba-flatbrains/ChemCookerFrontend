@@ -1,11 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-skilltree-node',
   templateUrl: './skilltree-node.component.html',
   styleUrls: ['./skilltree-node.component.css']
 })
-export class SkilltreeNodeComponent {
+export class SkilltreeNodeComponent implements OnInit{
+  ngOnInit(): void {
+    
+  }
   @Input() self !: SkilltreeNode
   @Input() unlocked !: boolean
 }
