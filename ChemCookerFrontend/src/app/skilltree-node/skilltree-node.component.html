@@ -1,6 +1,7 @@
-
-<app-tiny-chemical [disableAnimation]="true" [smile]="self.chem_rewards[0]"
-*ngIf="self.chem_rewards.length > 0"></app-tiny-chemical>
-<mat-icon *ngIf="self.chem_rewards.length <= 0">star</mat-icon>
-<!-- add misc reward icon-->
+<div class="box" [style.filter]="!unlocked ? 'brightness(0.7)' : ''">
+    <app-tiny-chemical [disableAnimation]="true" [smile]="self.chem_rewards[0]"
+    *ngIf="self.chem_rewards.length > 0"></app-tiny-chemical>
+    <mat-icon *ngIf="self.chem_rewards.length <= 0">star</mat-icon>
+    <!-- add misc reward icon-->
+</div>
 
