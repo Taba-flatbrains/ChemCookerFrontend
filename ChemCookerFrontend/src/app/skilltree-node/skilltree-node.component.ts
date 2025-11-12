@@ -16,6 +16,11 @@ export class SkilltreeNodeComponent implements AfterViewInit{
   @Input() self !: SkilltreeNode
   @Input() unlocked !: boolean
   @Input() centerOnLoad = false
+
+  unlockNode() {
+    if (this.unlocked) return;
+    console.log("Unlock node:", this.self.id)
+  }
 }
 
 export interface SkilltreeNode {
