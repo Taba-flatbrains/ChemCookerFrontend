@@ -9,20 +9,19 @@
     <div class="tooltip-content">
         <h3>{{ self.title }}</h3>
         <p>{{ self.description }}</p>
+        <h4 *ngIf="self.chem_rewards.length > 0 || self.misc_rewards.length > 0">Unlocks:</h4>
         <div *ngIf="self.chem_rewards.length > 0">
-            <h4>Chemical Rewards:</h4>
             <ul>
-                <li *ngFor="let chem of self.chem_rewards">
-                    <app-tiny-chemical [smile]="chem"></app-tiny-chemical>
-                </li>
+                <div *ngFor="let chem of self.chem_rewards">
+                    <app-tiny-chemical [smile]="chem" [disableAnimation]="true"></app-tiny-chemical>
+                </div>
             </ul>
         </div>
         <div *ngIf="self.misc_rewards.length > 0">
-            <h4>Miscellaneous Rewards:</h4>
             <ul>
-                <li *ngFor="let misc of self.misc_rewards">
+                <div *ngFor="let misc of self.misc_rewards">
                     <img [src]="misc">
-                </li>
+                </div>
             </ul>
         </div>
     </div>
