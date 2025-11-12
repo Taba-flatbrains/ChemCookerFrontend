@@ -1,4 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
+import { BackendService, PostRequestTypeUrls, UnlockSkilltreeNodeRequest, UnlockSkilltreeNodeResponse } from '../util/backend.service';
+import { ChemicalsService } from '../chemical/chemicals.service';
 
 @Component({
   selector: 'app-skilltree-node',
@@ -6,7 +8,7 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/co
   styleUrls: ['./skilltree-node.component.css']
 })
 export class SkilltreeNodeComponent implements AfterViewInit{
-  constructor (private el:ElementRef) {}
+  constructor (private el:ElementRef, private backendService:BackendService, private chemService:ChemicalsService) {}
 
   ngAfterViewInit(): void {
     if (this.centerOnLoad) {
@@ -19,7 +21,14 @@ export class SkilltreeNodeComponent implements AfterViewInit{
 
   unlockNode() {
     if (this.unlocked) return;
-    console.log("Unlock node:", this.self.id)
+    this.backendService.Post<UnlockSkilltreeNodeRequest, UnlockSkilltreeNodeResponse>(PostRequestTypeUrls.UnlockSkilltreeNode, {
+      id: this.self.id
+    }).subscribe(response => {
+      if (response.success) {
+        this.unlocked = true;
+        this.chemService.unlockedChemicals.push(...response.unlocked_chemicals);
+      }
+    });
   }
 }
 

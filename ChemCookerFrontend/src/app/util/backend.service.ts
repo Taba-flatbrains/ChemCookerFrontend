@@ -118,4 +118,5 @@ export interface GetSkilltreeResponse {
 
 export interface UnlockSkilltreeNodeResponse {
     success : boolean
+    unlocked_chemicals : Chemical[]
 }
