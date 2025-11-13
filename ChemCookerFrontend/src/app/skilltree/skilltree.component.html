@@ -2,10 +2,27 @@
     <div class="flex-column">
         <div class="flex-row" *ngFor="let y of range(-1, 10)">
             <div *ngFor="let x of range(-10, 10)">
-                <app-skilltree-node [self]="getNodeFromPos(x, y)!" [unlocked]="unlockedSkilltreeNodes.includes(getNodeFromPos(x, y)!.id)"
-                *ngIf="getNodeFromPos(x, y)" [centerOnLoad]="getNodeFromPos(x, y)!.id == unlockedSkilltreeNodes.at(-1)"></app-skilltree-node>
-                <div [style.visibility]="'hidden'" style="width: 50px; height: 50px;"></div>
+                <div style="width: 100px; height: 100px;">
+                    <div *ngIf="getNodeFromPos(x, y)" class="node">
+                        <div class="flex-row" style="flex-grow: 1;">
+                            <div class="placeholder"></div>
+                            <div class="vline" *ngIf="getNodeFromPos(x, y-1)"></div>
+                            <div class="placeholder"></div>
+                        </div> <!-- top row-->
+                        <div class="flex-row">
+                            <div class="hline" [style.hidden]="getNodeFromPos(x-1, y)"></div>
+                            <app-skilltree-node [self]="getNodeFromPos(x, y)!" [unlocked]="unlockedSkilltreeNodes.includes(getNodeFromPos(x, y)!.id)"
+                            *ngIf="getNodeFromPos(x, y)" [centerOnLoad]="getNodeFromPos(x, y)!.id == unlockedSkilltreeNodes.at(-1)"></app-skilltree-node>
+                            <div class="hline" *ngIf="getNodeFromPos(x+1, y)"></div>
+                        </div> <!-- middle row -->
+                        <div class="flex-row" style="flex-grow: 1;">
+                            <div class="placeholder"></div>
+                            <div class="vline" *ngIf="getNodeFromPos(x, y+1)"></div>
+                            <div class="placeholder"></div>
+                        </div> <!-- bottom row -->
+                    </div>
+                </div>
             </div>
-        </div>
+        </div> 
     </div>
 </drag-scroll>
