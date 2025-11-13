@@ -1,4 +1,4 @@
-<div class="box" (click)="selectQuest()">  
+<div class="box" (click)="selectQuest()" [style.border-color]="backgroundColor">  
     <div class="svg" [innerHTML]="svg" (click)="selectQuest()"></div>
     <p *ngIf="self.reward_skillpoints > 0 || self.reward_misc">Reward:</p>
     <p *ngIf="self.reward_skillpoints == 1">{{self.reward_skillpoints + "Skillpoint"}}</p>

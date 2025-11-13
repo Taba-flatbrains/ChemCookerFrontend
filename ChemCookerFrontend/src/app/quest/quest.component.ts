@@ -26,6 +26,7 @@ export class QuestComponent implements AfterViewInit, OnChanges {
   };
 
   svg : undefined | SafeHtml;
+  backgroundColor : string = "#7f7f7fff";
   
   ngAfterViewInit() {
       this.rdkitService.getRDKit().subscribe(
@@ -33,6 +34,11 @@ export class QuestComponent implements AfterViewInit, OnChanges {
             const temp : string | undefined = rdkit.get_mol(this.self.condition_value)?.get_svg(this.EstimateSize(this.self.condition_value).width, this.EstimateSize(this.self.condition_value).height);
             if (temp)
               this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp);
+            if (this.questService.completedQuests.includes(this.self.id)) {
+              this.backgroundColor = "#43e417ff";
+            } else {
+              this.backgroundColor = "#7f7f7fff";
+            }
             this.cdref.detectChanges();
         }
       )

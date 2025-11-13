@@ -22,7 +22,7 @@ export class SkilltreeComponent implements OnInit {
       this.unlockedSkilltreeNodes = r.unlocked_skilltree_nodes;
       for (let i of range(-10, 20)) {
         this.nodesDict[i] = {}
-        for (let j of range(-10, 10)) {
+        for (let j of range(-20, 20)) {
           this.nodesDict[i][j] = undefined;
           for (let node of this.allSkilltreeNodes) {
             if (node.x == i && node.y == j) {
