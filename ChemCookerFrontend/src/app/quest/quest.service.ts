@@ -34,6 +34,10 @@ export class QuestService {
         this.backendService.Get<GetAllQuestsResponse>(GetRequestTypeUrls.GetAllQuests).subscribe(response => {
             this.completedQuests = response.completed_quests;
             this.Quests = response.quests;
+            this.selectedQuest = (this.completedQuests.at(-1) || 0) + 1;
+            if (this.getQuestById(this.selectedQuest).id == 0 && this.Quests.length > 0) {
+                this.selectedQuest = this.Quests[0].id;
+            }
             this.changeCurrentQuest(this.selectedQuest)
         });
     }
