@@ -12,27 +12,30 @@ export class SkilltreeComponent implements OnInit {
 
   allSkilltreeNodes : SkilltreeNode[] = []
   unlockedSkilltreeNodes : number[] = []
+  nodesDict : {[x:number]: { [y:number]: SkilltreeNode | undefined }} = {}
 
   range = range
-  nodeGap = 60;
-  getNodeFromPos(x:number, y:number): SkilltreeNode | undefined {
-    for (let node of this.allSkilltreeNodes) {
-      if (node.x == x && node.y == y) {
-        return node
-      }
-    }
-    return
-  }
 
   ngOnInit(): void {
     this.backendService.Get<GetSkilltreeResponse>(GetRequestTypeUrls.GetSkilltree).subscribe(r => {
       this.allSkilltreeNodes = r.skilltree_nodes;
       this.unlockedSkilltreeNodes = r.unlocked_skilltree_nodes;
+      for (let i of range(-10, 20)) {
+        this.nodesDict[i] = {}
+        for (let j of range(-10, 10)) {
+          this.nodesDict[i][j] = undefined;
+          for (let node of this.allSkilltreeNodes) {
+            if (node.x == i && node.y == j) {
+              this.nodesDict[i][j] = node;
+            }
+          }
+        }
+      }
     });
   }
 }
 
-function range(start:number, stop:number | undefined = undefined, step:number | undefined = undefined) {
+function range(start:number, stop:number | undefined = undefined, step:number | undefined = undefined) : number[] {
     if (!stop) {
         // one param defined
         stop = start;
