@@ -34,8 +34,8 @@ export class QuestService {
         this.backendService.Get<GetAllQuestsResponse>(GetRequestTypeUrls.GetAllQuests).subscribe(response => {
             this.completedQuests = response.completed_quests;
             this.Quests = response.quests;
+            this.changeCurrentQuest(this.selectedQuest)
         });
-        this.changeCurrentQuest(this.selectedQuest)
     }
 
     getQuestById(id: number): Quest {
