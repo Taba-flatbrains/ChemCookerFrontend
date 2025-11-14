@@ -13,7 +13,8 @@ export class SkilltreeComponent implements OnInit {
 
   allSkilltreeNodes : SkilltreeNode[] = []
   unlockedSkilltreeNodes : number[] = []
-  nodesDict : {[x:number]: { [y:number]: SkilltreeNode | undefined }} = {}
+  nodesDict : {[x:number]: { [y:number]: number | undefined }} = {}
+  idToNodeDict : {[id:number]: SkilltreeNode} = {}
 
   range = range
 
@@ -28,7 +29,8 @@ export class SkilltreeComponent implements OnInit {
           this.nodesDict[i][j] = undefined;
           for (let node of this.allSkilltreeNodes) {
             if (node.x == i && node.y == j) {
-              this.nodesDict[i][j] = node;
+              this.idToNodeDict[node.id] = node;
+              this.nodesDict[i][j] = node.id;
             }
           }
         }

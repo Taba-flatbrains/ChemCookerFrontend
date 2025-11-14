@@ -12,12 +12,14 @@
     height: 100%;
 }
 .hline{
-    border-top:1px solid #000;
+    border-top-width: 1px;
+    border-top-color: #000;
     flex-grow: 1;
     transform: translate(0, 50%);
 }
 .vline{
-    border-left:1px solid #000;
+    border-left-width: 1px;
+    border-left-color: #000;
     flex-grow: 1;
     transform: translate(50%, 0);
 }
