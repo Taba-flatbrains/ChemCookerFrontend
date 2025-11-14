@@ -114,6 +114,7 @@ export interface GetAllQuestsResponse {
 export interface GetSkilltreeResponse {
   skilltree_nodes : SkilltreeNode[]
   unlocked_skilltree_nodes : number[]
+  availableSkillpoints : number
 }
 
 export interface UnlockSkilltreeNodeResponse {

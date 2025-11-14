@@ -34,6 +34,7 @@ import { SkilltreeNodeComponent } from './skilltree-node/skilltree-node.componen
 import { DragScrollComponent, DragScrollItemDirective } from 'ngx-drag-scroll';
 
 import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
+import { SkilltreeService } from './skilltree/skilltree-service';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,7 @@ import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
     CdkDragPlaceholder,
     MtxTooltipModule,
 ],
-  providers: [LoggedInService, BackendService, ChemicalsService],
+  providers: [LoggedInService, BackendService, ChemicalsService, SkilltreeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

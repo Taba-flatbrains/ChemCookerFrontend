@@ -9,6 +9,7 @@
     <div class="tooltip-content">
         <h3>{{ self.title }}</h3>
         <p>{{ self.description }}</p>
+        <p>{{'Cost: '+self.skillpoint_cost+' Skillpoint'}}</p>
         <h4 *ngIf="self.chem_rewards.length > 0 || self.misc_rewards.length > 0">Unlocks:</h4>
         <div *ngIf="self.chem_rewards.length > 0">
             <ul>

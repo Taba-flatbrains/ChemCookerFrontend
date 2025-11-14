@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ChemicalsService } from '../chemical/chemicals.service';
 import { BackendService, CookRequest, CookResponse, PostRequestTypeUrls } from '../util/backend.service';
+import { SkilltreeService } from '../skilltree/skilltree-service';
+import { QuestService } from '../quest/quest.service';
 
 @Component({
   selector: 'app-cooker',
@@ -9,7 +11,8 @@ import { BackendService, CookRequest, CookResponse, PostRequestTypeUrls } from '
   styleUrls: ['./cooker.component.css']
 })
 export class CookerComponent implements OnInit{
-  constructor(private el: ElementRef, private render: Renderer2, public chemService:ChemicalsService, private backendService:BackendService) { }
+  constructor(private el: ElementRef, private render: Renderer2, public chemService:ChemicalsService, 
+    private backendService:BackendService, private skilltreeService:SkilltreeService, private questService:QuestService) { }
 
 
   ngOnInit() {
@@ -31,6 +34,8 @@ export class CookerComponent implements OnInit{
     }).subscribe(response => {
       if (response.success) {
         this.chemService.unlockedChemicals.push(...response.new_chems); 
+        this.skilltreeService.skillpoints += response.skillpoints_gained;
+        this.questService.completedQuests.push(...response.quests_completed);
         for (var chem of response.products) {
           chem.initpos = this.el.nativeElement.getBoundingClientRect(); 
           chem.initpos!.x += Math.random() * this.el.nativeElement.getBoundingClientRect().width - 50;
@@ -38,6 +43,7 @@ export class CookerComponent implements OnInit{
           this.chemService.chemicalsInAction.push(chem)
         }
       }
+      this.clear()
     });
   }
 

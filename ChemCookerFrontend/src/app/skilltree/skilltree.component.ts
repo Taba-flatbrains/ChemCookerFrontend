@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService, GetRequestTypeUrls, GetSkilltreeResponse } from '../util/backend.service';
 import { SkilltreeNode } from '../skilltree-node/skilltree-node.component';
+import { SkilltreeService } from './skilltree-service';
 
 @Component({
   selector: 'app-skilltree',
@@ -8,7 +9,7 @@ import { SkilltreeNode } from '../skilltree-node/skilltree-node.component';
   styleUrls: ['./skilltree.component.css']
 })
 export class SkilltreeComponent implements OnInit {
-  constructor (private backendService:BackendService) {}
+  constructor (private backendService:BackendService, public skilltreeService:SkilltreeService) {}
 
   allSkilltreeNodes : SkilltreeNode[] = []
   unlockedSkilltreeNodes : number[] = []
@@ -20,6 +21,7 @@ export class SkilltreeComponent implements OnInit {
     this.backendService.Get<GetSkilltreeResponse>(GetRequestTypeUrls.GetSkilltree).subscribe(r => {
       this.allSkilltreeNodes = r.skilltree_nodes;
       this.unlockedSkilltreeNodes = r.unlocked_skilltree_nodes;
+      this.skilltreeService.skillpoints = r.availableSkillpoints;
       for (let i of range(-10, 20)) {
         this.nodesDict[i] = {}
         for (let j of range(-20, 20)) {
