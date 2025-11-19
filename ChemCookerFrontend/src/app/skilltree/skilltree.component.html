@@ -8,21 +8,21 @@
                         <div class="flex-row" style="flex-grow: 1;">
                             <div class="placeholder"></div>
                             <div class="vline" [style.visibility]="nodesDict[x][y-1] ? 'visible' : 'hidden'"
-                            [style.border-left-style]="unlockedSkilltreeNodes.includes(nodesDict[x][y-1]!) ? 'solid' : 'dotted'"></div>
+                            [style.border-left-style]="unlockedSkilltreeNodes.includes(nodesDict[x][y-1]!) && unlockedSkilltreeNodes.includes(nodesDict[x][y]!) ? 'solid' : 'dotted'"></div>
                             <div class="placeholder"></div>
                         </div> <!-- top row-->
                         <div class="flex-row">
                             <div class="hline" [style.visibility]="nodesDict[x-1][y] ? 'visible' : 'hidden'"
-                            [style.border-top-style]="unlockedSkilltreeNodes.includes(nodesDict[x-1][y]!) ? 'solid' : 'dotted'"></div>
+                            [style.border-top-style]="unlockedSkilltreeNodes.includes(nodesDict[x-1][y]!) && unlockedSkilltreeNodes.includes(nodesDict[x][y]!) ? 'solid' : 'dotted'"></div>
                             <app-skilltree-node [self]="idToNodeDict[nodesDict[x][y]!]" [unlocked]="unlockedSkilltreeNodes.includes(nodesDict[x][y]!)"
                             *ngIf="nodesDict[x][y]" [centerOnLoad]="nodesDict[x][y]! == unlockedSkilltreeNodes.at(-1)"></app-skilltree-node>
                             <div class="hline" [style.visibility]="nodesDict[x+1][y] ? 'visible' : 'hidden'"
-                            [style.border-top-style]="unlockedSkilltreeNodes.includes(nodesDict[x+1][y]!) ? 'solid' : 'dotted'"></div>
+                            [style.border-top-style]="unlockedSkilltreeNodes.includes(nodesDict[x+1][y]!) && unlockedSkilltreeNodes.includes(nodesDict[x][y]!) ? 'solid' : 'dotted'"></div>
                         </div> <!-- middle row -->
                         <div class="flex-row" style="flex-grow: 1;">
                             <div class="placeholder"></div>
                             <div class="vline" [style.visibility]="nodesDict[x][y+1] ? 'visible' : 'hidden'"
-                            [style.border-left-style]="unlockedSkilltreeNodes.includes(nodesDict[x][y+1]!) ? 'solid' : 'dotted'"></div>
+                            [style.border-left-style]="unlockedSkilltreeNodes.includes(nodesDict[x][y+1]!) && unlockedSkilltreeNodes.includes(nodesDict[x][y]!) ? 'solid' : 'dotted'"></div>
                             <div class="placeholder"></div>
                         </div> <!-- bottom row -->
                     </div>
