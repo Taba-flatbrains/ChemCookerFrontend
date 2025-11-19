@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RDKitModule } from '@rdkit/rdkit';
 import { RDKitLoaderService } from '../chemical/chemical.component';
@@ -9,7 +9,7 @@ import { QuestService } from './quest.service';
   templateUrl: './quest.component.html',
   styleUrls: ['./quest.component.css']
 })
-export class QuestComponent implements AfterViewInit, OnChanges {
+export class QuestComponent implements AfterViewInit, OnChanges, OnInit {
   constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef,
     private questService: QuestService
   ) {}
@@ -24,6 +24,12 @@ export class QuestComponent implements AfterViewInit, OnChanges {
     condition_type: QuestConditionTypes.ObtainChemical,
     condition_value: "CC(=O)CC"
   };
+
+  ngOnInit(): void {
+    this.questService.RefreshQuestEvent.subscribe(() => {
+      this.ngAfterViewInit();
+    });
+  }
 
   svg : undefined | SafeHtml;
   backgroundColor : string = "#7f7f7fff";

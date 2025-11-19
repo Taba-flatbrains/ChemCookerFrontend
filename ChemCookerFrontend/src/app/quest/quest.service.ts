@@ -2,6 +2,7 @@ import { Injectable, OnInit } from "@angular/core";
 import { BackendService, GetAllQuestsResponse, GetRequestTypeUrls } from "../util/backend.service";
 import { Quest, QuestConditionTypes } from "./quest.component";
 import { LoggedInService } from "../login/logged-in.service";
+import { Subject } from "rxjs";
 
 
 @Injectable({
@@ -40,6 +41,11 @@ export class QuestService {
             }
             this.changeCurrentQuest(this.selectedQuest)
         });
+    }
+
+    RefreshQuestEvent = new Subject<boolean>()
+    refreshQuests() {
+        this.RefreshQuestEvent.next(true);
     }
 
     getQuestById(id: number): Quest {
