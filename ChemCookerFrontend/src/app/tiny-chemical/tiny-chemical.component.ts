@@ -17,17 +17,28 @@ export class TinyChemicalComponent implements AfterViewInit {
   @Input() disableAnimation : boolean = false;
   svg : undefined | SafeHtml;
 
+  readonly DIASSymbol : string = "!";
   ngAfterViewInit() {
-      this.rdkitService.getRDKit().subscribe(
-        (rdkit: RDKitModule) => {
-            const temp : string | undefined = rdkit.get_mol(this.smile)?.get_svg(this.EstimateSize(this.smile).width, this.EstimateSize(this.smile).height);
-            if (temp)
-              this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp);
-            this.CalcPos();
-            this.cdref.detectChanges();
+    this.rdkitService.getRDKit().subscribe(
+      (rdkit: RDKitModule) => {
+        if (this.smile.startsWith(this.DIASSymbol)) {
+          const temp : string = `<svg xmlns="http://www.w3.org/2000/svg" width="${this.EstimateSize(this.smile).width}" height="${this.EstimateSize(this.smile).height}">
+            <rect width="100%" height="100%" fill="#ffffffff"/>
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#000000ff" font-family="Arial, sans-serif" font-size="30">
+              ${this.smile.substring(1)}
+            </text>
+          </svg>`;
+          this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp);
+          this.cdref.detectChanges();
+        } else {
+          const temp : string | undefined = rdkit.get_mol(this.smile)?.get_svg(this.EstimateSize(this.smile).width, this.EstimateSize(this.smile).height);
+          if (temp)
+            this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp);
+          this.cdref.detectChanges();
         }
-      )
-    }
+      }
+    )
+  }
 
   size : {width: number, height: number} = {width: 50, height: 50};
   EstimateSize(smile: string): {width: number, height: number} {
