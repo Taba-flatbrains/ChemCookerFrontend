@@ -6,6 +6,8 @@ import {RDKitModule} from '@rdkit/rdkit';
 import { first, Observable, ReplaySubject } from 'rxjs';
 import { Chemical, newChemical } from '../chem-bar/chem-bar.component';
 import { ChemicalsService } from './chemicals.service';
+import { NicknameChemicalComponent } from '../nickname-chemical/nickname-chemical.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'chemical',
@@ -20,6 +22,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   @Input() draggable : boolean = true;
   @Input() initialPosition : {x: number, y: number} | undefined;
   @Input() self : Chemical | undefined;
+  @Input() touchable : boolean = true;
   Style : { [klass: string]: any; } = {};
 
   @Output() position : {x: number, y: number} | undefined;
@@ -28,7 +31,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   svg : undefined | SafeHtml;
   active : boolean = true;
 
-  constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef, private chemService:ChemicalsService) {
+  constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef, private chemService:ChemicalsService, private dialog:MatDialog) {
   }
 
   @ViewChild('box') box : ElementRef | undefined;
@@ -46,6 +49,25 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
         }
       });
     }
+    this.chemService.RefreshChemicalsEvent.subscribe(() => {
+      this.ngAfterViewInit();
+      // update nickname
+      const chem = this.chemService.unlockedChemicals.find(c => c.smile === this.smile);
+      if (chem) {
+        this.nickname = chem.nickname;
+      }
+    });
+  }
+
+  openEditDialog() {
+    if(!this.touchable) return;
+    const dialogRef = this.dialog.open(NicknameChemicalComponent, {
+      data: {
+        smile: this.smile,
+        iupac: this.iupac,
+        nickname: this.nickname
+      }
+    });
   }
 
   // DIAS = Dont interpret as SMILES
@@ -120,7 +142,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   }
 
   duplicate(event : MouseEvent) {
-    if(this.draggable) return;
+    if(this.draggable || !this.touchable) return;
     this.chemService.chemicalsInAction.push(newChemical(this.smile, this.iupac, this.nickname, 
       {x: event.clientX - this.rect.width / 2, y: event.clientY - this.rect.height / 2}, true));
   }

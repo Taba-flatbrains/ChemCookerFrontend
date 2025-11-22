@@ -1,4 +1,4 @@
-<div [ngStyle]="Style" *ngIf="svg&&active" #box class="box" cdkDrag (cdkDragEnded)="dragEnd($event)" [cdkDragDisabled]="!draggable" (mousedown)="duplicate($event)">
+<div [ngStyle]="Style" *ngIf="svg&&active" #box class="box" cdkDrag (cdkDragEnded)="dragEnd($event)" [cdkDragDisabled]="!draggable" (mousedown)="duplicate($event)" (dblclick)="openEditDialog()">
     <div #molSVG [innerHTML]="svg"></div>
     <div class="text-flex">
     <p class="text nickname">{{nickname}}</p>

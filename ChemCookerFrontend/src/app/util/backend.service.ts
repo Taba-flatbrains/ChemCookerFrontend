@@ -40,7 +40,8 @@ export enum PostRequestTypeUrls {
     Login = "/login",
     Cook = "/cook",
     NicknameChemical = "/nicknamechemical",
-    UnlockSkilltreeNode = "/skilltree-upgrade"
+    UnlockSkilltreeNode = "/skilltree-upgrade",
+    SetNickame = "/set-nickname"
 }
 
 
@@ -69,6 +70,11 @@ export interface NicknameChemicalRequest {
 
 export interface UnlockSkilltreeNodeRequest {
     id: number
+}
+
+export interface UpdateNickanameRequest {
+    smile: string;
+    nickname: string;
 }
 
 // Response Types
@@ -120,4 +126,8 @@ export interface GetSkilltreeResponse {
 export interface UnlockSkilltreeNodeResponse {
     success : boolean
     unlocked_chemicals : Chemical[]
+}
+
+export interface UpdateNicknameResponse {
+    success: boolean;
 }

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Chemical, newChemical } from "../chem-bar/chem-bar.component";
+import { Subject } from "rxjs";
 
 
 @Injectable({
@@ -11,4 +12,9 @@ export class ChemicalsService {
     public chemicalsInAction : Chemical[] = []
 
     public cookerRect : DOMRect | undefined; // dirty way to transmit the cooker rect to chemical components
+
+    RefreshChemicalsEvent = new Subject<boolean>()
+    refreshChemicals() {
+        this.RefreshChemicalsEvent.next(true);
+    }
 }

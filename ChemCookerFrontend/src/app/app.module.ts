@@ -30,6 +30,7 @@ import { QuestComponent } from './quest/quest.component';
 import { QuestBarComponent } from './quest-bar/quest-bar.component';
 import { SkilltreeComponent } from './skilltree/skilltree.component';
 import { SkilltreeNodeComponent } from './skilltree-node/skilltree-node.component';
+import { NicknameChemicalComponent } from './nickname-chemical/nickname-chemical.component';
 
 import { DragScrollComponent, DragScrollItemDirective } from 'ngx-drag-scroll';
 
@@ -48,7 +49,8 @@ import { SkilltreeService } from './skilltree/skilltree-service';
     QuestComponent,
     QuestBarComponent,
     SkilltreeComponent,
-    SkilltreeNodeComponent
+    SkilltreeNodeComponent,
+    NicknameChemicalComponent
   ],
   imports: [
     BrowserModule,
