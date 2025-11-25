@@ -11,6 +11,7 @@
                 <app-quest [self]="questService.selectedQuestSelf"></app-quest>
                 <button mat-button class="button" (click)="openQuestDialog()">Quests</button>
                 <button mat-button class="button" (click)="openSkilltreeDialog()">Skilltree</button>
+                <button mat-button class="button" (click)="openPendingReactionsDialog()" *ngIf="chemService.pendingReactions.length > 0 || chemService.successfulPendingReactions.length > 0 || chemService.unsuccesfulPendingReactions.length > 0">Pending Reactions</button>
             </div>
         </div>
         <!-- Todo: add skilltree, quests, and current quest -->

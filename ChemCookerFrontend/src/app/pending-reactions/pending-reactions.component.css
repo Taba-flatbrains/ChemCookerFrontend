@@ -1,0 +1,31 @@
+.chemflex{
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+}
+
+.reaction{
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid gray;
+}
+
+.arrow{
+    font-size: 60px;
+}
+.conditions{
+    font-size: 12px;
+    text-align: center;
+    margin: -10px;
+    transform: translate(-5px, 0px);
+}
+.reaction-arrow-and-conditions-flex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+}

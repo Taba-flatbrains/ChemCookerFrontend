@@ -1,1 +1,43 @@
-<p>pending-reactions works!</p>
+<div style="display: flex; flex-direction: column; gap: 50px; padding: 10px; align-items: center;">
+    <div *ngIf="chemService.successfulPendingReactions.length > 0">
+        <p>Succesful reactions</p>
+        <div class="reaction" *ngFor="let reaction of chemService.successfulPendingReactions">
+            <div class="inputs chemflex"><app-tiny-chemical [disableAnimation]="true" [smile]="input" *ngFor="let input of reaction.inputs"></app-tiny-chemical></div>
+            <!-- reaktionspfeil mit conditions darüber-->
+             <div class="reaction-arrow-and-conditions-flex">
+                <p class="conditions">temp</p>
+                <p class="arrow">&rarr;</p>
+                <p class="conditions">hv</p>
+            </div>
+            <div class="outputs chemflex"><app-tiny-chemical [disableAnimation]="true" [smile]="output.smile" *ngFor="let output of reaction.products"></app-tiny-chemical></div>
+            <!-- todo: add border to newly obtained chems-->
+            <!-- todo: show which quest was completed through reaction -->
+        </div>
+    </div>
+    <div *ngIf="chemService.pendingReactions.length > 0">
+        <p>Pending reactions</p>
+        <div class="reaction" *ngFor="let reaction of chemService.pendingReactions">
+            <div class="inputs chemflex"><app-tiny-chemical [disableAnimation]="true" [smile]="input" *ngFor="let input of reaction.inputs"></app-tiny-chemical></div>
+            <!-- reaktionspfeil into fragezeichen-->
+            <div class="reaction-arrow-and-conditions-flex">
+                <p class="conditions">temp</p>
+                <p class="arrow">&rarr;</p>
+                <p class="conditions">hv</p>
+            </div>
+            <mat-icon>question_mark</mat-icon>
+        </div>
+    </div>
+    <div *ngIf="chemService.unsuccesfulPendingReactions.length > 0">
+        <p>Unsuccesful reactions</p>
+        <div class="reaction" *ngFor="let reaction of chemService.unsuccesfulPendingReactions">
+            <div class="inputs chemflex"><app-tiny-chemical [disableAnimation]="true" [smile]="input" *ngFor="let input of reaction.inputs"></app-tiny-chemical></div>
+            <!-- reaktionspfeil mit conditions drüber und rotem kreuz-->
+             <div class="reaction-arrow-and-conditions-flex">
+                <p class="conditions">temp</p>
+                <p class="arrow">&rarr;</p>
+                <p class="conditions">hv</p>
+            </div>
+            <mat-icon style="color: red;">close</mat-icon>
+        </div>
+    </div>
+</div>

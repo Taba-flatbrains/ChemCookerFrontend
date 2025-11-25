@@ -18,6 +18,7 @@ import { ChemicalsService } from './chemical/chemicals.service';
 import { QuestService } from './quest/quest.service';
 import { QuestBarComponent } from './quest-bar/quest-bar.component';
 import { SkilltreeComponent } from './skilltree/skilltree.component';
+import { PendingReactionsComponent } from './pending-reactions/pending-reactions.component';
 
 @Component({
   selector: 'app-root',
@@ -52,6 +53,12 @@ export class AppComponent implements OnInit {
   }
   openQuestDialog() {
     const dialogRef = this.dialog.open(QuestBarComponent, {
+
+    });
+  }
+
+  openPendingReactionsDialog() {
+    const dialogRef = this.dialog.open(PendingReactionsComponent, {
 
     });
   }
