@@ -4,6 +4,7 @@ import { ChemicalsService } from '../chemical/chemicals.service';
 import { BackendService, CookRequest, CookResponse, PostRequestTypeUrls } from '../util/backend.service';
 import { SkilltreeService } from '../skilltree/skilltree-service';
 import { QuestService } from '../quest/quest.service';
+import { Chemical } from '../chem-bar/chem-bar.component';
 
 @Component({
   selector: 'app-cooker',
@@ -43,6 +44,9 @@ export class CookerComponent implements OnInit{
           this.chemService.chemicalsInAction.push(chem)
         }
         this.questService.refreshQuests();
+      } else if (response.added_to_pending) {
+        this.chemService.pendingReactions.push({inputs: this.chemService.cookerChemicals, temp: +this.tempFormControl.value!, uv: this.uvFormControl.value!});
+        console.log(this.chemService.pendingReactions);
       }
       this.clear()
     });
@@ -51,4 +55,10 @@ export class CookerComponent implements OnInit{
   clear() {
     this.chemService.cookerChemicals = [];
   }
+}
+
+export interface Reaction {
+    inputs: string[]; // array of smiles
+    temp: number;
+    uv: boolean;
 }

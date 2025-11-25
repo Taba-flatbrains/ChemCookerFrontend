@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Chemical } from '../chem-bar/chem-bar.component';
 import { Quest } from '../quest/quest.component';
 import { SkilltreeNode } from '../skilltree-node/skilltree-node.component';
+import { Reaction } from '../cooker/cooker.component';
 
 @Injectable({
     providedIn: 'root'
@@ -33,6 +34,7 @@ export enum GetRequestTypeUrls {
     GetAvailableSkillpoints = "/availableskillpoints",
     ValidateToken = "/validatetoken",
     GetAllQuests = "/all-quests",
+    CheckPendingReactions = "/pending-reactions"
 }
 
 export enum PostRequestTypeUrls {
@@ -77,6 +79,12 @@ export interface UpdateNickanameRequest {
     nickname: string;
 }
 
+export interface  GetPendingReactionsResponse {
+    pending_reactions: Reaction[]; // array of inputs seperated by ;
+    removed_pending_reactions: Reaction[]; // array of inputs seperated by ;
+    successful_pending_reactions: CookResponse[];
+}
+
 // Response Types
 export interface ValidTokenResponse {
     valid: boolean;
@@ -94,10 +102,14 @@ export interface CreateAccountResponse { // same as login response
 
 export interface CookResponse {
     success: boolean;
+    inputs: string[]; // array of smiles
+    temp: number;
+    uv: boolean;
     products: Chemical[]; 
     new_chems: Chemical[];
     skillpoints_gained: number;
     quests_completed: number[]; // array of quest IDs
+    added_to_pending: boolean;
 }
 
 export interface NicknameChemicalResponse {

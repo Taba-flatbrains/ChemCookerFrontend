@@ -64,6 +64,10 @@ export class AppComponent implements OnInit {
     this.questService.updateQuests();
     this.loggedInService.LoggedInStatusChangeEvent.subscribe(() => {
         this.questService.updateQuests()
+        this.chemService.refreshPendingReactions();
+        setInterval(() => {
+          this.chemService.refreshPendingReactions(false);
+        }, 5000);
     })
     this.loggedInService.UpdateLoggedInStatus()
   }
