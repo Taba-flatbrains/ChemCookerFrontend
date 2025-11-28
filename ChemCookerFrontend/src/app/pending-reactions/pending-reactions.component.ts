@@ -8,4 +8,6 @@ import { ChemicalsService } from '../chemical/chemicals.service';
 })
 export class PendingReactionsComponent {
   constructor(public chemService:ChemicalsService) { }
+
+  tempToString : { [id:number] : string} = { 1 : "Cold", 10 : "rt. ", 100: "Reflux", 1000 : "pyro"}
 }

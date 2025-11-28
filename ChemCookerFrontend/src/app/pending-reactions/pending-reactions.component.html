@@ -5,9 +5,9 @@
             <div class="inputs chemflex"><app-tiny-chemical [disableAnimation]="true" [smile]="input" *ngFor="let input of reaction.inputs"></app-tiny-chemical></div>
             <!-- reaktionspfeil mit conditions darüber-->
              <div class="reaction-arrow-and-conditions-flex">
-                <p class="conditions">temp</p>
+                <p class="conditions">{{tempToString[reaction.temp]}}</p>
                 <p class="arrow">&rarr;</p>
-                <p class="conditions">hv</p>
+                <p class="conditions">{{reaction.uv ? "hv" : ""}}</p>
             </div>
             <div class="outputs chemflex"><app-tiny-chemical [disableAnimation]="true" [smile]="output.smile" *ngFor="let output of reaction.products"></app-tiny-chemical></div>
             <!-- todo: add border to newly obtained chems-->
@@ -20,9 +20,9 @@
             <div class="inputs chemflex"><app-tiny-chemical [disableAnimation]="true" [smile]="input" *ngFor="let input of reaction.inputs"></app-tiny-chemical></div>
             <!-- reaktionspfeil into fragezeichen-->
             <div class="reaction-arrow-and-conditions-flex">
-                <p class="conditions">temp</p>
+                <p class="conditions">{{tempToString[reaction.temp]}}</p>
                 <p class="arrow">&rarr;</p>
-                <p class="conditions">hv</p>
+                <p class="conditions">{{reaction.uv ? "hv" : ""}}</p>
             </div>
             <mat-icon>question_mark</mat-icon>
         </div>
@@ -33,9 +33,9 @@
             <div class="inputs chemflex"><app-tiny-chemical [disableAnimation]="true" [smile]="input" *ngFor="let input of reaction.inputs"></app-tiny-chemical></div>
             <!-- reaktionspfeil mit conditions drüber und rotem kreuz-->
              <div class="reaction-arrow-and-conditions-flex">
-                <p class="conditions">temp</p>
+                <p class="conditions">{{tempToString[reaction.temp]}}</p>
                 <p class="arrow">&rarr;</p>
-                <p class="conditions">hv</p>
+                <p class="conditions">{{reaction.uv ? "hv" : ""}}</p>
             </div>
             <mat-icon style="color: red;">close</mat-icon>
         </div>
