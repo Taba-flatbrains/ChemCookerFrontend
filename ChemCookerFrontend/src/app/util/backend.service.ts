@@ -25,7 +25,7 @@ export class BackendService {
 }
 
 export enum URLS {
-    BackendURL = "http://localhost:8000",
+    BackendURL = "http://10.183.109.33:8000",
 }
 
 export enum GetRequestTypeUrls {

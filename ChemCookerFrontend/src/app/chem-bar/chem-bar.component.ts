@@ -78,7 +78,7 @@ export class ChemBarComponent implements OnInit{
 export function newChemical(smile: string, iupac: string = "", nickname: string = "", 
   initpos : {x: number, y: number} | undefined = undefined, dragOnCreate = false) : Chemical 
 {
-  return {smile: smile, iupac: iupac, nickname: nickname, initpos: initpos, key: crypto.randomUUID(), dragOnCreate : dragOnCreate};
+  return {smile: smile, iupac: iupac, nickname: nickname, initpos: initpos, key: "", dragOnCreate : dragOnCreate};
 }
 
 export interface Chemical {
