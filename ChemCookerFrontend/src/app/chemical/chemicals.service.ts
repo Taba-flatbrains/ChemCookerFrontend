@@ -46,7 +46,7 @@ export class ChemicalsService {
             }
             this.unsuccesfulPendingReactions.push(...response.removed_pending_reactions);
             this.questService.refreshQuests();
-            if (this.successfulPendingReactions.length > 0) {
+            if (response.successful_pending_reactions.length > 0) {
                 this.dialog.open(PendingReactionsComponent, {});
             }
         });
