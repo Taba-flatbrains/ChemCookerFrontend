@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { LoggedInService } from '../login/logged-in.service';
 import { BackendService, CreateAccountRequest, CreateAccountResponse, PostRequestTypeUrls } from '../util/backend.service';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -13,7 +13,7 @@ export class SignUpComponent {
   constructor(private loggedInService:LoggedInService, private backendService:BackendService, private dialogRef:MatDialogRef<SignUpComponent>) { }
 
   usernameFormControl = new FormControl('');
-  emailFormControl = new FormControl('');
+  emailFormControl = new FormControl('', Validators.email);
   passwordFormControl = new FormControl('');
   confirmPasswordFormControl = new FormControl('');
 
@@ -22,7 +22,10 @@ export class SignUpComponent {
       alert("Passwords do not match!"); // todo: better error handling
       return;
     }
-    // todo: check if name, pwd and email are valid (name must not contain an @)
+    if (!this.emailFormControl.valid) {
+      alert("Please enter a valid email address!"); // todo: better error handling
+      return;
+    }
     this.backendService.Post<CreateAccountRequest, CreateAccountResponse>(PostRequestTypeUrls.CreateAccount, {
       username: this.usernameFormControl.value!,
       email: this.emailFormControl.value!,

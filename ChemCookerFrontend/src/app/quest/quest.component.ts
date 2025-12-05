@@ -3,6 +3,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RDKitModule } from '@rdkit/rdkit';
 import { RDKitLoaderService } from '../chemical/chemical.component';
 import { QuestService } from './quest.service';
+import { LoggedInService } from '../login/logged-in.service';
 
 @Component({
   selector: 'app-quest',
@@ -11,7 +12,7 @@ import { QuestService } from './quest.service';
 })
 export class QuestComponent implements AfterViewInit, OnChanges, OnInit {
   constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef,
-    private questService: QuestService
+    private questService: QuestService, private loggedInService: LoggedInService
   ) {}
 
   qctypes = QuestConditionTypes; // for html access
@@ -27,6 +28,10 @@ export class QuestComponent implements AfterViewInit, OnChanges, OnInit {
 
   ngOnInit(): void {
     this.questService.RefreshQuestEvent.subscribe(() => {
+      this.ngAfterViewInit();
+    });
+    this.loggedInService.LoggedInStatusChangeEvent.subscribe(() => {
+      this.questService.refreshQuests();
       this.ngAfterViewInit();
     });
   }
