@@ -34,8 +34,8 @@ export class SignUpComponent {
       next: (response) => {
         if (response.success) {
           this.loggedInService.LoggedIn = true;
-          this.loggedInService.LoggedInStatusChangeEvent.next(true)
           this.loggedInService.setToken(response.token);
+          this.loggedInService.LoggedInStatusChangeEvent.next(true)
           this.dialogRef.close()
         } else {
           alert("Account creation failed: "); // todo: better error handling
