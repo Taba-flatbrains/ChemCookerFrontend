@@ -35,7 +35,6 @@ export class ChemicalsService {
         if (!force && this.pendingReactions.length == 0) {
             return;
         }
-        // todo: get pending reactions from backend, add chems in successful pending reactions
         this.backendService.Get<GetPendingReactionsResponse>(GetRequestTypeUrls.CheckPendingReactions).subscribe(response => {
             this.pendingReactions = response.pending_reactions;
             for (var reaction of response.successful_pending_reactions) {

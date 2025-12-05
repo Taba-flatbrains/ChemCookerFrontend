@@ -14,7 +14,6 @@
                 <button mat-button class="button" (click)="openPendingReactionsDialog()" *ngIf="chemService.pendingReactions.length > 0 || chemService.successfulPendingReactions.length > 0 || chemService.unsuccesfulPendingReactions.length > 0">Pending Reactions</button>
             </div>
         </div>
-        <!-- Todo: add skilltree, quests, and current quest -->
         <div *ngFor="let chemical of chemService.chemicalsInAction">
             <chemical *ngIf="chemical" [self]="chemical" [smile]="chemical.smile" [nickname]="chemical.nickname" [iupac]="chemical.iupac" [initialPosition]="chemical.initpos"></chemical>
         </div>
