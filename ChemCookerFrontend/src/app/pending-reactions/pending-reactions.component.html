@@ -13,6 +13,9 @@
                 <app-tiny-chemical [disableAnimation]="true" [smile]="output.smile" *ngFor="let output of reaction.products_whighlighting"
                 [style]="output.new ? newChemStyle : ''"></app-tiny-chemical>
             </div>
+            <div class="chemflex">
+                <app-quest [self]="quest" *ngFor="let quest of reaction.quest_selfs"></app-quest>
+            </div>
             <!-- todo: show which quest was completed through reaction -->
         </div>
     </div>
