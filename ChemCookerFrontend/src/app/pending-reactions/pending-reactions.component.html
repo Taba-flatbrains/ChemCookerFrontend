@@ -1,7 +1,7 @@
 <div style="display: flex; flex-direction: column; gap: 50px; padding: 10px; align-items: center;">
-    <div *ngIf="chemService.successfulPendingReactions.length > 0">
+    <div *ngIf="succesfulReactions.length > 0">
         <p>Succesful reactions</p>
-        <div class="reaction" *ngFor="let reaction of chemService.successfulPendingReactions">
+        <div class="reaction" *ngFor="let reaction of succesfulReactions">
             <div class="inputs chemflex"><app-tiny-chemical [disableAnimation]="true" [smile]="input" *ngFor="let input of reaction.inputs"></app-tiny-chemical></div>
             <!-- reaktionspfeil mit conditions darüber-->
              <div class="reaction-arrow-and-conditions-flex">
@@ -9,8 +9,10 @@
                 <p class="arrow">&rarr;</p>
                 <p class="conditions">{{reaction.uv ? "hv" : ""}}</p>
             </div>
-            <div class="outputs chemflex"><app-tiny-chemical [disableAnimation]="true" [smile]="output.smile" *ngFor="let output of reaction.products"></app-tiny-chemical></div>
-            <!-- todo: add border to newly obtained chems-->
+            <div class="outputs chemflex">
+                <app-tiny-chemical [disableAnimation]="true" [smile]="output.smile" *ngFor="let output of reaction.products_whighlighting"
+                [style]="output.new ? newChemStyle : ''"></app-tiny-chemical>
+            </div>
             <!-- todo: show which quest was completed through reaction -->
         </div>
     </div>
