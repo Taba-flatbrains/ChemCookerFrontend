@@ -37,4 +37,11 @@
 .account-management-buttons {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+}
+
+.name{
+  margin: 10px 10px 0 0;
+  font-weight: bold;
+  font-size: large;
 }

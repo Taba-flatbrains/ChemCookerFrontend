@@ -16,7 +16,7 @@
             <div class="chemflex">
                 <app-quest [self]="quest" *ngFor="let quest of reaction.quest_selfs"></app-quest>
             </div>
-            <!-- todo: show which quest was completed through reaction -->
+            <!-- todo: test if display of quests works -->
         </div>
     </div>
     <div *ngIf="chemService.pendingReactions.length > 0">

@@ -79,6 +79,9 @@
               "buildTarget": "ChemCookerFrontend:build:development"
             }
           },
+          "options": {
+            "port": 34475
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {

@@ -10,13 +10,14 @@ export class LoggedInService {
     constructor(private cookieService: CookieService, private backendService:BackendService) { }
 
     LoggedIn : boolean = false;
+    LoggedInAs: string = "";
 
     LoggedInStatusChangeEvent = new Subject<boolean>()
 
     CheckLoggedIn() : Observable<ValidTokenResponse> {
         if (!this.cookieService.check('token')) {
             return new Observable<ValidTokenResponse>(subscriber => {
-                subscriber.next({valid: false});
+                subscriber.next({valid: false, name: ""});
                 subscriber.complete();
             });
         }
@@ -31,6 +32,7 @@ export class LoggedInService {
         }
         this.CheckLoggedIn().subscribe(response => {
             this.LoggedIn = response.valid;
+            this.LoggedInAs = response.name
             this.LoggedInStatusChangeEvent.next(response.valid)
             Subscription(this.LoggedIn);
             // if the token is not valid, delete it

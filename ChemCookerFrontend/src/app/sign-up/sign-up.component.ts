@@ -34,6 +34,7 @@ export class SignUpComponent {
       next: (response) => {
         if (response.success) {
           this.loggedInService.LoggedIn = true;
+          this.loggedInService.LoggedInAs = response.name
           this.loggedInService.setToken(response.token);
           this.loggedInService.LoggedInStatusChangeEvent.next(true)
           this.dialogRef.close()

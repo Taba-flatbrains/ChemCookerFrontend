@@ -25,7 +25,7 @@ export class BackendService {
 }
 
 export enum URLS {
-    BackendURL = "http://10.183.109.33:8000",
+    BackendURL = "http://localhost:8000",
 }
 
 export enum GetRequestTypeUrls {
@@ -88,16 +88,19 @@ export interface  GetPendingReactionsResponse {
 // Response Types
 export interface ValidTokenResponse {
     valid: boolean;
+    name: string;
 }
 
 export interface LoginResponse {
     success: boolean;
     token: string;
+    name: string;
 }
 
 export interface CreateAccountResponse { // same as login response
     success: boolean;
     token: string;
+    name: string;
 }
 
 export interface CookResponse {
