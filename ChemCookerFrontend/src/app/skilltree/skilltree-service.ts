@@ -12,7 +12,6 @@ export class SkilltreeService {
     canUseUV = false;
     updateCanUseUV() : boolean {
         this.canUseUV = this.unlockedSkilltreeNodes.includes(this.lightSkilltreeNodeID);
-        console.log("canUseUV updated to " + this.canUseUV);
         return this.canUseUV;
     }
 
