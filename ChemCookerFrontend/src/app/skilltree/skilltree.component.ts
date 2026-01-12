@@ -9,34 +9,14 @@ import { SkilltreeService } from './skilltree-service';
   styleUrls: ['./skilltree.component.css']
 })
 export class SkilltreeComponent implements OnInit {
-  constructor (private backendService:BackendService, public skilltreeService:SkilltreeService) {}
+  constructor (public skilltreeService:SkilltreeService) {}
 
-  allSkilltreeNodes : SkilltreeNode[] = []
-  unlockedSkilltreeNodes : number[] = []
-  nodesDict : {[x:number]: { [y:number]: number | undefined }} = {}
-  idToNodeDict : {[id:number]: SkilltreeNode} = {}
-
-  range = range
 
   ngOnInit(): void {
-    this.backendService.Get<GetSkilltreeResponse>(GetRequestTypeUrls.GetSkilltree).subscribe(r => {
-      this.allSkilltreeNodes = r.skilltree_nodes;
-      this.unlockedSkilltreeNodes = r.unlocked_skilltree_nodes;
-      this.skilltreeService.skillpoints = r.availableSkillpoints;
-      for (let i of range(-10, 20)) {
-        this.nodesDict[i] = {}
-        for (let j of range(-20, 20)) {
-          this.nodesDict[i][j] = undefined;
-          for (let node of this.allSkilltreeNodes) {
-            if (node.x == i && node.y == j) {
-              this.idToNodeDict[node.id] = node;
-              this.nodesDict[i][j] = node.id;
-            }
-          }
-        }
-      }
-    });
+    this.skilltreeService.init();
   }
+
+  range = range
 }
 
 function range(start:number, stop:number | undefined = undefined, step:number | undefined = undefined) : number[] {

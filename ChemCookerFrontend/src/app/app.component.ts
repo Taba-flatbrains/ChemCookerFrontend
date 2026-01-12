@@ -19,6 +19,7 @@ import { QuestService } from './quest/quest.service';
 import { QuestBarComponent } from './quest-bar/quest-bar.component';
 import { SkilltreeComponent } from './skilltree/skilltree.component';
 import { PendingReactionsComponent } from './pending-reactions/pending-reactions.component';
+import { SkilltreeService } from './skilltree/skilltree-service';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,7 @@ import { PendingReactionsComponent } from './pending-reactions/pending-reactions
 })
 export class AppComponent implements OnInit {
   constructor(public loggedInService:LoggedInService, private dialog:MatDialog, public chemService:ChemicalsService,
-    public questService:QuestService
+    public questService:QuestService, private skilltreeService:SkilltreeService
   ) { }
 
   title = 'ChemCookerFrontend';
@@ -71,6 +72,7 @@ export class AppComponent implements OnInit {
     this.questService.updateQuests();
     this.loggedInService.LoggedInStatusChangeEvent.subscribe(() => {
         this.questService.updateQuests()
+        this.skilltreeService.init();
         this.chemService.refreshPendingReactions();
         setInterval(() => {
           this.chemService.refreshPendingReactions(false);

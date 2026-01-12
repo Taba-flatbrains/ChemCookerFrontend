@@ -1,8 +1,12 @@
 <div class="box" [style.filter]="!unlocked ? 'brightness(0.7)' : ''" (click)="unlockNode()" [mtxTooltip]="tooltipTemplate">
     <app-tiny-chemical [disableAnimation]="true" [smile]="self.chem_rewards[0]"
     *ngIf="self.chem_rewards.length > 0"></app-tiny-chemical>
-    <mat-icon *ngIf="self.chem_rewards.length <= 0">star</mat-icon>
+    <mat-icon *ngIf="self.chem_rewards.length <= 0 && self.misc_rewards.length == 0">star</mat-icon>
     <!-- add misc reward icon-->
+
+    <div *ngIf="self.misc_rewards.length > 0 && self.chem_rewards.length == 0" class="misc-reward-icon">
+        <mat-icon *ngIf="self.misc_rewards[0] == 'light'" style="margin: 5px;">sunny</mat-icon>
+    </div>
 </div>
 
 <ng-template #tooltipTemplate>

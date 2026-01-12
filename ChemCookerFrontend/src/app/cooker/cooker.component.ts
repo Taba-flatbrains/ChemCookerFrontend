@@ -13,7 +13,7 @@ import { Chemical } from '../chem-bar/chem-bar.component';
 })
 export class CookerComponent implements OnInit{
   constructor(private el: ElementRef, private render: Renderer2, public chemService:ChemicalsService, 
-    private backendService:BackendService, private skilltreeService:SkilltreeService, private questService:QuestService) { }
+    private backendService:BackendService, public skilltreeService:SkilltreeService, private questService:QuestService) { }
 
 
   ngOnInit() {

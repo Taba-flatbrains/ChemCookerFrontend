@@ -9,7 +9,7 @@
         </mat-select>
     </mat-form-field>
 
-    <mat-slide-toggle [formControl]="uvFormControl" style="align-self: center;">UV</mat-slide-toggle>
+    <mat-slide-toggle [formControl]="uvFormControl" style="align-self: center;" [style.visibility]="skilltreeService.canUseUV ? 'visible' : 'hidden'">UV</mat-slide-toggle>
 
     <button mat-raised-button color="primary" (click)="submit()">Cook</button>
 
