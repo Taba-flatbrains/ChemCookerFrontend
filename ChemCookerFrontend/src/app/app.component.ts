@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.questService.updateQuests();
     this.loggedInService.LoggedInStatusChangeEvent.subscribe(() => {
-        this.questService.updateQuests()
+        this.questService.updateQuests();
         this.skilltreeService.init();
         this.chemService.refreshPendingReactions();
         setInterval(() => {

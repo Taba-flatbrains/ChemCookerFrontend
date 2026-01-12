@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { ChangeDetectorRef, Injectable } from "@angular/core";
 import { SkilltreeNode } from "../skilltree-node/skilltree-node.component";
 import { BackendService, GetRequestTypeUrls, GetSkilltreeResponse } from "../util/backend.service";
 
@@ -12,6 +12,7 @@ export class SkilltreeService {
     canUseUV = false;
     updateCanUseUV() : boolean {
         this.canUseUV = this.unlockedSkilltreeNodes.includes(this.lightSkilltreeNodeID);
+        console.log("canUseUV updated to " + this.canUseUV);
         return this.canUseUV;
     }
 
@@ -33,6 +34,10 @@ export class SkilltreeService {
             }
         }
         });
+        setTimeout(()=> {
+    
+        this.updateCanUseUV();
+        }, 0);
     }
 
     allSkilltreeNodes : SkilltreeNode[] = []
