@@ -1,7 +1,7 @@
 <drag-scroll style="width: 50vh; height: 50vh;" *ngIf="skilltreeService.allSkilltreeNodes.length > 0">
     <div class="flex-column">
         <p class="skillpoint-display">{{skilltreeService.skillpoints}}</p>
-        <div class="flex-row" *ngFor="let y of range(-1, 10)">
+        <div class="flex-row" *ngFor="let y of range(-3, 10)">
             <div *ngFor="let x of range(-10, 10)">
                 <div style="width: 140px; height: 140px;">
                     <div *ngIf="skilltreeService.nodesDict[x][y]" class="node">
