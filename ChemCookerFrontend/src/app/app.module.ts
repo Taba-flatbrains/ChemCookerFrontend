@@ -37,6 +37,7 @@ import { DragScrollComponent, DragScrollItemDirective } from 'ngx-drag-scroll';
 import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
 import { SkilltreeService } from './skilltree/skilltree-service';
 import { PendingReactionsComponent } from './pending-reactions/pending-reactions.component';
+import { DailyChallengeSelectorComponent } from './daily-challenge-selector/daily-challenge-selector.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { PendingReactionsComponent } from './pending-reactions/pending-reactions
     SkilltreeComponent,
     SkilltreeNodeComponent,
     NicknameChemicalComponent,
-    PendingReactionsComponent
+    PendingReactionsComponent,
+    DailyChallengeSelectorComponent
   ],
   imports: [
     BrowserModule,

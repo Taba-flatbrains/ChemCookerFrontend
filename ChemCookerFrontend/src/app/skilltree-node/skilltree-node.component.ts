@@ -29,6 +29,8 @@ export class SkilltreeNodeComponent implements AfterViewInit{
         this.unlocked = true;
         this.chemService.unlockedChemicals.push(...response.unlocked_chemicals);
         this.skilltreeService.skillpoints -= this.self.skillpoint_cost;
+        this.skilltreeService.unlockedSkilltreeNodes.push(this.self.id);
+        this.skilltreeService.refreshThickLines()
       }
     });
   }

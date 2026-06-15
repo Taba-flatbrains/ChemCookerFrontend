@@ -20,6 +20,7 @@ import { QuestBarComponent } from './quest-bar/quest-bar.component';
 import { SkilltreeComponent } from './skilltree/skilltree.component';
 import { PendingReactionsComponent } from './pending-reactions/pending-reactions.component';
 import { SkilltreeService } from './skilltree/skilltree-service';
+import { DailyChallengeSelectorComponent } from './daily-challenge-selector/daily-challenge-selector.component';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +29,18 @@ import { SkilltreeService } from './skilltree/skilltree-service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  returnToMain() {
+    throw new Error('Method not implemented.'); // should return to main, button should only be visible when in daily challenge
+  }
+
+
+  openDailyChallengeSelectorDialog() {
+    const dialogRef = this.dialog.open(DailyChallengeSelectorComponent, {
+      
+    });
+  }
+
+
   constructor(public loggedInService:LoggedInService, private dialog:MatDialog, public chemService:ChemicalsService,
     public questService:QuestService, private skilltreeService:SkilltreeService
   ) { }

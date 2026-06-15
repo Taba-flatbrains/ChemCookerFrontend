@@ -8,6 +8,9 @@ import { BackendService, GetRequestTypeUrls, GetSkilltreeResponse } from "../uti
 export class SkilltreeService {
     skillpoints: number = 0;
 
+    skilltreeHeight = [-3, 10];
+    skilltreeWidth = [-10, 10];
+
     lightSkilltreeNodeID : number = 18
     canUseUV = false;
     updateCanUseUV() : boolean {
@@ -20,9 +23,9 @@ export class SkilltreeService {
         this.allSkilltreeNodes = r.skilltree_nodes;
         this.unlockedSkilltreeNodes = r.unlocked_skilltree_nodes;
         this.skillpoints = r.availableSkillpoints;
-        for (let i of range(-10, 20)) {
-            this.nodesDict[i] = {}
-            for (let j of range(-20, 20)) {
+        for (let j of range(this.skilltreeWidth[0]-1, this.skilltreeWidth[1]+1)) { this.nodesDict[j] = {} }
+        for (let i of range(this.skilltreeHeight[0]-1, this.skilltreeHeight[1]+1)) {
+            for (let j of range(this.skilltreeWidth[0]-1, this.skilltreeWidth[1]+1)) {
             this.nodesDict[i][j] = undefined;
             for (let node of this.allSkilltreeNodes) {
                 if (node.x == i && node.y == j) {
@@ -32,6 +35,7 @@ export class SkilltreeService {
             }
             }
         }
+        this.refreshThickLines()
         });
         setTimeout(()=> {
     
@@ -39,10 +43,38 @@ export class SkilltreeService {
         }, 0);
     }
 
+    refreshThickLines() {
+        for (let j of range(this.skilltreeWidth[0]-1, this.skilltreeWidth[1]+1)) { this.thickLinesV[j] = {}; this.thickLinesH[j] = {}; }
+        for (let i of range(this.skilltreeHeight[0]-1, this.skilltreeHeight[1]+1)) {
+            this.thickLinesV[i] = {}
+            this.thickLinesH[i] = {}
+            for (let j of range(this.skilltreeWidth[0]-1, this.skilltreeWidth[1]+1)) {
+                this.thickLinesV[i][j] = false;
+                this.thickLinesH[i][j] = false;
+                if (this.nodesDict[i][j] != undefined && this.nodesDict[i][j+1] != undefined) {
+                    let node1 = this.idToNodeDict[this.nodesDict[i][j]!];
+                    let node2 = this.idToNodeDict[this.nodesDict[i][j+1]!];
+                    if (this.unlockedSkilltreeNodes.includes(node1.id) && this.unlockedSkilltreeNodes.includes(node2.id)) {
+                        this.thickLinesV[i][j] = true;
+                    }
+                }
+                if (this.nodesDict[i][j] != undefined && this.nodesDict[i+1][j] != undefined) {
+                    let node1 = this.idToNodeDict[this.nodesDict[i][j]!];
+                    let node2 = this.idToNodeDict[this.nodesDict[i+1][j]!];
+                    if (this.unlockedSkilltreeNodes.includes(node1.id) && this.unlockedSkilltreeNodes.includes(node2.id)) {
+                        this.thickLinesH[i][j] = true;
+                    }
+                }
+            }
+        }
+    }
+
     allSkilltreeNodes : SkilltreeNode[] = []
   unlockedSkilltreeNodes : number[] = []
   nodesDict : {[x:number]: { [y:number]: number | undefined }} = {}
   idToNodeDict : {[id:number]: SkilltreeNode} = {}
+  thickLinesV : {[x:number]: { [y:number]: boolean }} = {}
+  thickLinesH : {[x:number]: { [y:number]: boolean }} = {}
 
 
   range = range
