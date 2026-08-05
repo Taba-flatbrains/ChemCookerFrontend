@@ -17,31 +17,34 @@ export class TinyChemicalComponent implements AfterViewInit {
   @Input() disableAnimation : boolean = false;
   svg : undefined | SafeHtml;
 
-  readonly DIASSymbol : string = "!";
+  text : undefined | string;
+  true_smile : undefined | string;
+
+  size : {width: number, height: number} = {width: 50, height: 50};
+
+  // DIAS = Dont interpret as SMILES
+  readonly DIASSymbol : string = "\"";
   ngAfterViewInit() {
+    this.text = undefined;
     this.rdkitService.getRDKit().subscribe(
       (rdkit: RDKitModule) => {
-        if (this.smile.startsWith(this.DIASSymbol)) {
-          const temp : string = `<svg xmlns="http://www.w3.org/2000/svg" width="${this.EstimateSize(this.smile).width}" height="${this.EstimateSize(this.smile).height}">
-            <rect width="100%" height="100%" fill="#ffffffff"/>
-            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#000000ff" font-family="Arial, sans-serif" font-size="30">
-              ${this.smile.substring(1)}
-            </text>
-          </svg>`;
-          this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp);
-          this.cdref.detectChanges();
-        } else {
-          const temp : string | undefined = rdkit.get_mol(this.smile)?.get_svg(this.EstimateSize(this.smile).width, this.EstimateSize(this.smile).height);
-          if (temp)
-            this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp);
-          this.cdref.detectChanges();
+        const parts = this.smile.split(this.DIASSymbol)
+        this.true_smile = parts[0]
+        if (parts.length > 1) {
+          this.text = parts[1]
+          this.text = this.text.replaceAll(".", "·")
+          this.text = this.text.replaceAll("_{", "<sub>") // todo: add better system (numbers immediatly after letters are always low or add undescore to lower immediatly following char)
+          this.text = this.text.replaceAll("_}", "</sub>")
         }
+        const temp : string | undefined = rdkit.get_mol(this.true_smile)?.get_svg(this.EstimateSizeSmile(this.true_smile).width, this.EstimateSizeSmile(this.true_smile).height);
+        if (temp)
+          this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp);
+        this.cdref.detectChanges();
       }
     )
   }
 
-  size : {width: number, height: number} = {width: 50, height: 50};
-  EstimateSize(smile: string): {width: number, height: number} {
+  EstimateSizeSmile(smile: string): {width: number, height: number} {
     let letters_only = smile.replace(/[^A-Za-z]/g, '');
     let numbers_only = smile.replace(/[^0-9]/g, '');
     let wf = 1 + letters_only.length * 0.025 - numbers_only.length * 0.035;
@@ -49,6 +52,22 @@ export class TinyChemicalComponent implements AfterViewInit {
     let height = 50 * wf;
 
     this.size = {width: width, height: height};
+    return {width: width, height: height};
+  }
+
+  EstimateSizeText(text: string): {width: number, height: number} {
+    let letters_only = text.replace(/[^A-Za-z]/g, '');
+    let width = letters_only.length * 10;
+    
+    let wf = 1;
+    if (this.true_smile) {
+      letters_only = this.true_smile.replace(/[^A-Za-z]/g, '');
+      let numbers_only = this.true_smile.replace(/[^0-9]/g, '');
+      let wf = 1 + letters_only.length * 0.025 - numbers_only.length * 0.035;
+    }
+    let height = 50 * wf;
+
+
     return {width: width, height: height};
   }
 

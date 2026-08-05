@@ -6,3 +6,19 @@
     padding: 3px;
     border-radius: 3px;
 }
+.row-flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.textbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.text-smile{
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
