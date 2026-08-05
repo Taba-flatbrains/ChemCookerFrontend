@@ -13,7 +13,7 @@ export class SkilltreeNodeComponent implements AfterViewInit{
 
   ngAfterViewInit(): void {
     if (this.centerOnLoad) {
-      this.el.nativeElement.scrollIntoView();
+      this.el.nativeElement.scrollIntoView(); // todo: would be nicer to return to last position but I dont know how to do that
     }
   }
   @Input() self !: SkilltreeNode

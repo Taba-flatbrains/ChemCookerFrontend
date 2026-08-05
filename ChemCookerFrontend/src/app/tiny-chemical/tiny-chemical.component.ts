@@ -44,6 +44,7 @@ export class TinyChemicalComponent implements AfterViewInit {
     )
   }
 
+  // todo: make more beautiful
   EstimateSizeSmile(smile: string): {width: number, height: number} {
     let letters_only = smile.replace(/[^A-Za-z]/g, '');
     let numbers_only = smile.replace(/[^0-9]/g, '');
