@@ -27,3 +27,20 @@
     font-size: smaller;
     color: gray;
 }
+
+.row-flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.textbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.text-smile{
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+}

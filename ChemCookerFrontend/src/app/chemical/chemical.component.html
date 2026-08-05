@@ -1,7 +1,10 @@
 <div [ngStyle]="Style" *ngIf="svg&&active" #box class="box" cdkDrag (cdkDragEnded)="dragEnd($event)" [cdkDragDisabled]="!draggable" (mousedown)="duplicate($event)" (dblclick)="openEditDialog()">
-    <div #molSVG [innerHTML]="svg"></div>
+    <div class="row-flex">
+        <div *ngIf="true_smile" #molSVG [innerHTML]="svg"></div>
+        <div *ngIf="text" class="textbox text-smile" [style.width]="!true_smile ? EstimateSizeText(text!).width + 'px': null" [style.height]="!true_smile ? EstimateSizeText(text!).height + 'px' : null" [innerHTML]="'<p>'+text+'</p>'"></div>
+    </div>
     <div class="text-flex">
-    <p class="text nickname">{{nickname}}</p>
-    <p class="text iupac">{{iupac}}</p>
+        <p class="text nickname">{{nickname}}</p>
+        <p class="text iupac">{{iupac}}</p>
     </div>
 </div>

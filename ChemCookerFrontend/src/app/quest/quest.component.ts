@@ -37,49 +37,76 @@ export class QuestComponent implements AfterViewInit, OnChanges, OnInit {
   }
 
   svg : undefined | SafeHtml;
-  backgroundColor : string = "#7f7f7fff";
-  
-  ngAfterViewInit() {
-      this.rdkitService.getRDKit().subscribe(
-        (rdkit: RDKitModule) => {
-            const temp : string | undefined = rdkit.get_mol(this.self.condition_value)?.get_svg(this.EstimateSize(this.self.condition_value).width, this.EstimateSize(this.self.condition_value).height);
-            if (temp)
-              this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp);
-            if (this.questService.completedQuests.includes(this.self.id)) {
-              this.backgroundColor = "#43e417ff";
-            } else {
-              this.backgroundColor = "#7f7f7fff";
-            }
-            this.cdref.detectChanges();
-        }
-      )
-    }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.ngAfterViewInit();
-  }
+  text : undefined | string;
+  true_smile : undefined | string;
+  backgroundColor : string = "#7f7f7fff";
 
   size : {width: number, height: number} = {width: 50, height: 50};
-  EstimateSize(smile: string): {width: number, height: number} {
+  
+  // DIAS = Dont interpret as SMILES
+  readonly DIASSymbol : string = "\"";
+  ngAfterViewInit() {
+    this.text = undefined;
+    this.rdkitService.getRDKit().subscribe(
+      (rdkit: RDKitModule) => {
+        const parts = this.self.condition_value.split(this.DIASSymbol)
+        this.true_smile = parts[0]
+        if (parts.length > 1) {
+          this.text = parts[1]
+          this.text = this.text.replaceAll(".", "·")
+          this.text = this.text.replaceAll("_{", "<sub>") // todo: add better system (numbers immediatly after letters are always low or add undescore to lower immediatly following char)
+          this.text = this.text.replaceAll("_}", "</sub>")
+        }
+        const temp : string | undefined = rdkit.get_mol(this.true_smile)?.get_svg(this.EstimateSizeSmile(this.true_smile).width, this.EstimateSizeSmile(this.true_smile).height);
+        if (temp)
+          this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp);
+        this.cdref.detectChanges();
+      }
+    )
+  }
+
+  EstimateSizeSmile(smile: string): {width: number, height: number} {
     let letters_only = smile.replace(/[^A-Za-z]/g, '');
     let numbers_only = smile.replace(/[^0-9]/g, '');
     let wf = 1 + letters_only.length * 0.05 - numbers_only.length * 0.07;
-    let width = Math.max(80, window.outerWidth * 0.085) * wf;
-    let height = Math.max(70, window.outerWidth * 0.08);
+    let width = Math.max(64, window.outerWidth * 0.085) * wf;
+    let height = Math.max(60, window.outerWidth * 0.08);
 
     // limit width to 30% of screen width
     if (width > window.outerWidth * 0.3) {
       width = window.outerWidth * 0.3;
     }
-    // limit height to 11% of screen height
-    if (height > window.outerHeight * 0.11) {
-      height = window.outerHeight * 0.11;
+    // limit height to 10% of screen height
+    if (height > window.outerHeight * 0.10) {
+      height = window.outerHeight * 0.10;
     }
 
-    this.size = {width: width, height: height};
+    return {width: width, height: height};
+  }
+  EstimateSizeText(text: string): {width: number, height: number} {
+    let letters_only = text.replace(/[^A-Za-z]/g, '');
+    let width = letters_only.length * 20;
+    let height = Math.max(60, window.outerWidth * 0.08);
+
+    // limit height to 10% of screen height
+    if (height > window.outerHeight * 0.10) {
+      height = window.outerHeight * 0.10;
+    }
+
+    // min width if smile is empty
+    if (this.true_smile === "") {
+      width = Math.max(width, 120);
+    }
+
     return {width: width, height: height};
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.ngAfterViewInit();
+  }
+
+  
   selectQuest() {
     this.questService.changeCurrentQuest(this.self.id);
   }
