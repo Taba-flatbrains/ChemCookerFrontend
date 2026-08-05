@@ -44,11 +44,12 @@ export class TinyChemicalComponent implements AfterViewInit {
     )
   }
 
+  wf_multiplier = 3.3;
   // todo: make more beautiful
   EstimateSizeSmile(smile: string): {width: number, height: number} {
     let letters_only = smile.replace(/[^A-Za-z]/g, '');
     let numbers_only = smile.replace(/[^0-9]/g, '');
-    let wf = 1 + letters_only.length * 0.025 - numbers_only.length * 0.035;
+    let wf = 1 + (letters_only.length * 0.025 - numbers_only.length * 0.025) * this.wf_multiplier;
     let width = 50 * wf;
     let height = 50 * wf;
 
@@ -57,16 +58,17 @@ export class TinyChemicalComponent implements AfterViewInit {
   }
 
   EstimateSizeText(text: string): {width: number, height: number} {
-    let letters_only = text.replace(/[^A-Za-z]/g, '');
-    let width = letters_only.length * 10;
+    let width_increase = text.replace(/[^A-Za-z]/g, '').length * 1;
     
     let wf = 1;
+    let letters_only = '';
     if (this.true_smile) {
       letters_only = this.true_smile.replace(/[^A-Za-z]/g, '');
       let numbers_only = this.true_smile.replace(/[^0-9]/g, '');
-      let wf = 1 + letters_only.length * 0.025 - numbers_only.length * 0.035;
+      wf = 1 + (letters_only.length * 0.025 - numbers_only.length * 0.015) * this.wf_multiplier;
     }
     let height = 50 * wf;
+    let width = 50 * wf + width_increase;
 
 
     return {width: width, height: height};
