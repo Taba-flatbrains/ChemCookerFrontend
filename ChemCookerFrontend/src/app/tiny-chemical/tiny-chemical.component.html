@@ -1,4 +1,4 @@
-<div class="row-flex">
+<div class="row-flex" [style.transform]="'translate('+pos.left+', '+pos.top+')'">
         <div *ngIf="true_smile" #molSVG [innerHTML]="svg"></div>
         <div *ngIf="text" class="textbox text-smile" [style.width]="!true_smile ? EstimateSizeText(text!).width + 'px': null" [style.height]="!true_smile ? EstimateSizeText(text!).height + 'px' : null" [innerHTML]="'<p>'+text+'</p>'"></div>
     </div>
