@@ -1,4 +1,4 @@
-<div class="cooker-container" [ngStyle]="{'background-image': 'url('+backgroundImage+')'}">
+<div class="cooker-container" [ngStyle]="{'background-image': 'url('+artstyleService.artstyleIDtoCookerImagePath[artstyleService.currentArtstyle]+')'}" (dblclick)="nextArtstyle()">
     <mat-form-field>
         <mat-label>Temperature</mat-label>
         <mat-select [formControl]="tempFormControl">

@@ -2,7 +2,9 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 80px;
+  padding: 130px;
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: contain;
 }
 

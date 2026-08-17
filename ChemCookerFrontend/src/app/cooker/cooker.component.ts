@@ -5,6 +5,7 @@ import { BackendService, CookRequest, CookResponse, PostRequestTypeUrls } from '
 import { SkilltreeService } from '../skilltree/skilltree-service';
 import { QuestService } from '../quest/quest.service';
 import { Chemical } from '../chem-bar/chem-bar.component';
+import { ArtstyleService } from '../util/artstyle.service';
 
 @Component({
   selector: 'app-cooker',
@@ -13,7 +14,8 @@ import { Chemical } from '../chem-bar/chem-bar.component';
 })
 export class CookerComponent implements OnInit{
   constructor(private el: ElementRef, private render: Renderer2, public chemService:ChemicalsService, 
-    private backendService:BackendService, public skilltreeService:SkilltreeService, private questService:QuestService) { }
+    private backendService:BackendService, public skilltreeService:SkilltreeService, private questService:QuestService,
+  public artstyleService:ArtstyleService) { }
 
 
   ngOnInit() {
@@ -21,8 +23,6 @@ export class CookerComponent implements OnInit{
         this.chemService.cookerRect = this.el.nativeElement.getBoundingClientRect();
     });
   }
-
-  backgroundImage : string = 'assets/pot.webp';  // todo: add diferent styles
 
   tempFormControl = new FormControl("10");
   uvFormControl = new FormControl(false);
@@ -54,6 +54,10 @@ export class CookerComponent implements OnInit{
 
   clear() {
     this.chemService.cookerChemicals = [];
+  }
+
+  nextArtstyle() {
+    this.artstyleService.nextArtstyle();
   }
 }
 
