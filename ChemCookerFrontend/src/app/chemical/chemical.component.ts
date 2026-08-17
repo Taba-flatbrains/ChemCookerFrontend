@@ -8,6 +8,7 @@ import { Chemical, newChemical } from '../chem-bar/chem-bar.component';
 import { ChemicalsService } from './chemicals.service';
 import { NicknameChemicalComponent } from '../nickname-chemical/nickname-chemical.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Artstyle, ArtstyleService } from '../util/artstyle.service';
 
 @Component({
   selector: 'chemical',
@@ -34,7 +35,9 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   text : undefined | string;
   true_smile : undefined | string;
 
-  constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef, private chemService:ChemicalsService, private dialog:MatDialog) {
+  constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, 
+    private cdref: ChangeDetectorRef, private chemService:ChemicalsService, private dialog:MatDialog,
+  private artstyleService:ArtstyleService) {
   }
 
   @ViewChild('box') box : ElementRef | undefined;
@@ -138,14 +141,16 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   }
 
   checkInCooker() {
-    // add condition
+    if (this.chemService.cookerChemicals.includes(this.smile) && this.artstyleService.currentArtstyle == Artstyle.Modern) { return;}
     if (!this.box) { return; }
     if (!intersectRect(this.chemService.cookerRect!, this.box!.nativeElement.getBoundingClientRect())) {
       return;
     }
 
     this.removeSelf()
-    this.chemService.cookerChemicals.push(this.smile);
+    if (!this.chemService.cookerChemicals.includes(this.smile)) {
+      this.chemService.cookerChemicals.push(this.smile);
+    }
   }
 
   checkOutOfBounds() {
