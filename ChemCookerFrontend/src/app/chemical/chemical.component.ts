@@ -141,7 +141,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   }
 
   checkInCooker() {
-    if (this.chemService.cookerChemicals.includes(this.smile) && this.artstyleService.currentArtstyle == Artstyle.Modern) { return;}
+    if (this.chemService.cookerChemicals.includes(this.smile) && this.artstyleService.currentArtstyle == this.artstyleService.defaultArtstyle) { return;}
     if (!this.box) { return; }
     if (!intersectRect(this.chemService.cookerRect!, this.box!.nativeElement.getBoundingClientRect())) {
       return;

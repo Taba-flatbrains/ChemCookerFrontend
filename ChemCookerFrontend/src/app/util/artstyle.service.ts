@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 
-export enum Artstyle {
+export enum Artstyle { // todo: hab grad drüber nachgedaxht dass ich vielleicht zu pixeliger ästetik wechseln sollte, weil ich das einfach gewöhnt bin
+    // ^^ innerhalb von einem pixel aber gradient drinnen oder sowas um bisschen smoother zu machen auf großem maßstab
     Modern, // default
     Alchemy, // todo: add background maybe to a yellowish tint and make chemicals appear like scrolls
     Lab,
@@ -11,6 +12,7 @@ export enum Artstyle {
   providedIn: 'root'
 })
 export class ArtstyleService {
+    defaultArtstyle: Artstyle = Artstyle.Modern;
     currentArtstyle: Artstyle = Artstyle.Modern;
 
 
