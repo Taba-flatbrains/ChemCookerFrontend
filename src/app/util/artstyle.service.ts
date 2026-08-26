@@ -4,6 +4,7 @@ export enum Artstyle { // todo: hab grad drüber nachgedaxht dass ich vielleicht
     // ^^ innerhalb von einem pixel aber gradient drinnen oder sowas um bisschen smoother zu machen auf großem maßstab
     Modern, // default
     Alchemy, // todo: add background maybe to a yellowish tint and make chemicals appear like scrolls
+    // todo: maybe add animation (no need for many frames 3 or 4 frames should be enough) 
     Lab,
     Kitchen,
 }
