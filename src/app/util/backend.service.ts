@@ -26,7 +26,7 @@ export class BackendService {
 }
 
 export class URLS {
-    public static BackendURL = process.env['API_URL'] || environment.API_URL || "http://localhost:8000";
+    public static BackendURL = environment.API_URL
 }
 
 export enum GetRequestTypeUrls {

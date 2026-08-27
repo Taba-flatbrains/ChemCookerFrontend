@@ -21,11 +21,10 @@
     "@angular/platform-browser-dynamic": "^17.3.12",
     "@angular/router": "^17.3.12",
     "@ibm-materials/ts-smiles-drawer": "^0.0.3",
-    
+    "@ng-matero/extensions": "^17.3.8",
+    "@ngx-env/builder": "^17.3.0",
     "@rdkit/rdkit": "^2025.3.4-1.0.0",
     "ngx-cookie-service": "^17.1.0",
-    "@ng-matero/extensions": "^17.3.8",
-    
     "ngx-drag-scroll": "^19.0.0-rc.0",
     "rdkit": "^0.5.1",
     "rxjs": "~7.8.0",
