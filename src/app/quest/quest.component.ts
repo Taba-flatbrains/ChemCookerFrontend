@@ -41,12 +41,17 @@ export class QuestComponent implements AfterViewInit, OnChanges, OnInit {
   text : undefined | string;
   true_smile : undefined | string;
   backgroundColor : string = "#7f7f7fff";
+  borderWidth : string = "1px";
 
   size : {width: number, height: number} = {width: 50, height: 50};
   
   // DIAS = Dont interpret as SMILES
   readonly DIASSymbol : string = "\"";
   ngAfterViewInit() {
+    if (this.questService.completedQuests.includes(this.self.id)) {
+      this.backgroundColor = "#2fbe0f7f";
+      this.borderWidth = "3px";
+    }
     this.text = undefined;
     this.rdkitService.getRDKit().subscribe(
       (rdkit: RDKitModule) => {
