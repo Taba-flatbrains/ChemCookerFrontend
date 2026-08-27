@@ -6,6 +6,7 @@ import { Chemical } from '../chem-bar/chem-bar.component';
 import { Quest } from '../quest/quest.component';
 import { SkilltreeNode } from '../skilltree-node/skilltree-node.component';
 import { Reaction } from '../cooker/cooker.component';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -24,8 +25,8 @@ export class BackendService {
   }
 }
 
-export enum URLS {
-    BackendURL = "http://localhost:8000",
+export class URLS {
+    public static BackendURL = environment.API_URL
 }
 
 export enum GetRequestTypeUrls {
