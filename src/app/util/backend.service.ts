@@ -30,21 +30,21 @@ export class URLS {
 }
 
 export enum GetRequestTypeUrls {
-    GetSkilltree = "/skilltree",
-    GetAvailableChemicals = "/availablechems",
-    GetAvailableSkillpoints = "/availableskillpoints",
-    ValidateToken = "/validatetoken",
-    GetAllQuests = "/all-quests",
-    CheckPendingReactions = "/pending-reactions"
+    GetSkilltree = "/skilltree/",
+    GetAvailableChemicals = "/availablechems/",
+    GetAvailableSkillpoints = "/availableskillpoints/",
+    ValidateToken = "/validatetoken/",
+    GetAllQuests = "/all-quests/",
+    CheckPendingReactions = "/pending-reactions/"
 }
 
 export enum PostRequestTypeUrls {
-    CreateAccount = "/signup",
-    Login = "/login",
-    Cook = "/cook",
-    NicknameChemical = "/nicknamechemical",
-    UnlockSkilltreeNode = "/skilltree-upgrade",
-    SetNickame = "/set-nickname"
+    CreateAccount = "/signup/",
+    Login = "/login/",
+    Cook = "/cook/",
+    NicknameChemical = "/nicknamechemical/",
+    UnlockSkilltreeNode = "/skilltree-upgrade/",
+    SetNickame = "/set-nickname/"
 }
 
 
