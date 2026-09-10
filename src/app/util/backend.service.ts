@@ -44,7 +44,9 @@ export enum PostRequestTypeUrls {
     Cook = "/cook",
     NicknameChemical = "/nicknamechemical",
     UnlockSkilltreeNode = "/skilltree-upgrade",
-    SetNickame = "/set-nickname"
+    SetNickame = "/set-nickname",
+    InitTempAccount = "/create_temp_account",
+    UpgradeAccountPermanent = "/upgrade_account_permanent"
 }
 
 
@@ -56,6 +58,14 @@ export interface LoginRequest {
 
 export interface CreateAccountRequest {
     username: string;
+    email: string;
+    password: string;
+    difficulty: number;
+}
+
+export interface UpgradeAccountPermanentRequest {
+    username: string;
+    temp_account_name: string;
     email: string;
     password: string;
 }
@@ -86,10 +96,15 @@ export interface  GetPendingReactionsResponse {
     successful_pending_reactions: CookResponse[];
 }
 
+export interface InitTempAccountRequest {
+    difficulty: number;
+}
+
 // Response Types
 export interface ValidTokenResponse {
     valid: boolean;
     name: string;
+    temp_account: boolean;
 }
 
 export interface LoginResponse {
@@ -99,6 +114,17 @@ export interface LoginResponse {
 }
 
 export interface CreateAccountResponse { // same as login response
+    success: boolean;
+    token: string;
+    name: string;
+}
+
+export interface UpgradeAccountPermanentResponse {
+    success: boolean;
+    name: string;
+}
+
+export interface InitTempAccountResponse {
     success: boolean;
     token: string;
     name: string;

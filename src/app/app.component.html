@@ -2,10 +2,10 @@
     <div class="action-space">
         <div class="header">
             <div class="account-management-buttons">
-                <button mat-button class="button" *ngIf="!loggedInService.LoggedIn" (click)="openLoginDialog()">Login</button>
-                <button mat-button class="button" *ngIf="!loggedInService.LoggedIn" (click)="openSignUpDialog()">Sign up</button>
+                <button mat-button class="button" *ngIf="!loggedInService.LoggedIn || !loggedInService.RealAccount" (click)="openLoginDialog()">Login</button>
+                <button mat-button class="button" *ngIf="!loggedInService.LoggedIn || !loggedInService.RealAccount" (click)="openSignUpDialog()">Sign up</button>
                 <p *ngIf="loggedInService.LoggedIn" class="name">{{loggedInService.LoggedInAs}}</p>
-                <button mat-button class="button" *ngIf="loggedInService.LoggedIn" (click)="logout()">Logout</button>
+                <button mat-button class="button" *ngIf="loggedInService.LoggedIn && loggedInService.RealAccount" (click)="logout()">Logout</button>
                 <button mat-button class="button" *ngIf="loggedInService.LoggedIn" (click)="openDailyChallengeSelectorDialog()">Daily Challenge</button>
                 <button mat-button class="button" *ngIf="loggedInService.LoggedIn" (click)="returnToMain()">Return Home</button>
             </div>

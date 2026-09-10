@@ -38,6 +38,7 @@ import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
 import { SkilltreeService } from './skilltree/skilltree-service';
 import { PendingReactionsComponent } from './pending-reactions/pending-reactions.component';
 import { DailyChallengeSelectorComponent } from './daily-challenge-selector/daily-challenge-selector.component';
+import { InitAccountDialogComponent } from './init-account-dialog/init-account-dialog.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { DailyChallengeSelectorComponent } from './daily-challenge-selector/dail
     SkilltreeNodeComponent,
     NicknameChemicalComponent,
     PendingReactionsComponent,
-    DailyChallengeSelectorComponent
+    DailyChallengeSelectorComponent,
+    InitAccountDialogComponent
   ],
   imports: [
     BrowserModule,

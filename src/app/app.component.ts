@@ -21,6 +21,8 @@ import { SkilltreeComponent } from './skilltree/skilltree.component';
 import { PendingReactionsComponent } from './pending-reactions/pending-reactions.component';
 import { SkilltreeService } from './skilltree/skilltree-service';
 import { DailyChallengeSelectorComponent } from './daily-challenge-selector/daily-challenge-selector.component';
+import { CookieService } from 'ngx-cookie-service';
+import { InitAccountDialogComponent } from './init-account-dialog/init-account-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -42,7 +44,7 @@ export class AppComponent implements OnInit {
 
 
   constructor(public loggedInService:LoggedInService, private dialog:MatDialog, public chemService:ChemicalsService,
-    public questService:QuestService, private skilltreeService:SkilltreeService
+    public questService:QuestService, private skilltreeService:SkilltreeService, private cookieService:CookieService
   ) { }
 
   title = 'ChemCookerFrontend';
@@ -84,6 +86,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.questService.updateQuests();
     this.loggedInService.LoggedInStatusChangeEvent.subscribe(() => {
+        if (!this.loggedInService.LoggedIn) {
+            this.openInitAccountDialog();
+        }
         this.questService.updateQuests();
         this.skilltreeService.init();
         this.chemService.refreshPendingReactions();
@@ -91,6 +96,16 @@ export class AppComponent implements OnInit {
           this.chemService.refreshPendingReactions(false);
         }, 5000);
     })
-    this.loggedInService.UpdateLoggedInStatus()
+    if (!this.cookieService.check('token')) {
+      this.openInitAccountDialog();
+    } else {  
+      this.loggedInService.UpdateLoggedInStatus()
+    }
+  }
+
+  openInitAccountDialog() {
+    this.dialog.open(InitAccountDialogComponent, {
+      disableClose: true
+    });
   }
 }

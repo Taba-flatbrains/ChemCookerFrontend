@@ -1,0 +1,11 @@
+<div class="flex-column">
+    <button mat-raised-button color="primary" (click)="openSignUpDialog()">Sign up</button>
+    <button mat-raised-button color="primary" (click)="openLoginDialog()">Login</button>
+    <br>
+    <p>Start playing without account</p>
+    <div class="flex-row">
+        <button mat-raised-button color="primary" (click)="initTempAccount(DifficultyLevel.Easy)">Easy</button>
+        <button mat-raised-button color="primary" (click)="initTempAccount(DifficultyLevel.Medium)">Medium</button>
+        <button mat-raised-button color="primary" (click)="initTempAccount(DifficultyLevel.Hard)">Hard</button>
+    </div>
+</div>
