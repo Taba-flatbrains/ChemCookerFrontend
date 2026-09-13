@@ -51,6 +51,9 @@ export class QuestComponent implements AfterViewInit, OnChanges, OnInit {
     if (this.questService.completedQuests.includes(this.self.id)) {
       this.backgroundColor = "#2fbe0f7f";
       this.borderWidth = "3px";
+    } else {
+      this.backgroundColor = "#7f7f7fff";
+      this.borderWidth = "1px";
     }
     this.text = undefined;
     this.rdkitService.getRDKit().subscribe(
