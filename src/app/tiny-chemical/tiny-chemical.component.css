@@ -12,8 +12,12 @@
     background-color: white;
     border-radius: 4px;
     padding: 4px;
+}
+
+.border-when-animated{
     border: 1px solid #ccc;
 }
+
 .textbox{
     display: flex;
     flex-direction: row;
@@ -23,4 +27,5 @@
 .text-smile{
     font-size: 15px;
     font-family: Arial, sans-serif;
+    color: black;
 }
