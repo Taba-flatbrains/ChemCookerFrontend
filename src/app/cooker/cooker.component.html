@@ -11,9 +11,9 @@
 
     <mat-slide-toggle [formControl]="uvFormControl" style="align-self: center;" [style.visibility]="skilltreeService.canUseUV ? 'visible' : 'hidden'">UV</mat-slide-toggle>
 
-    <button mat-raised-button color="primary" (click)="submit()">Cook</button>
+    <button mat-raised-button color="primary" (click)="submit()" style="z-index: 2;">Cook</button>
 
-    <button mat-raised-button color="accent" (click)="clear()">Clear</button>
+    <button mat-raised-button color="accent" (click)="clear()" style="z-index: 2;">Clear</button>
 
     <app-tiny-chemical [smile]="smile" *ngFor="let smile of chemService.cookerChemicals" class="tiny-chem"
     [ngStyle]="{'top':chemService.cookerRect!.height/2+'px', 'left':chemService.cookerRect!.width/2+'px'}"></app-tiny-chemical>
