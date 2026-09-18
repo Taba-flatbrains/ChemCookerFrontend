@@ -13,7 +13,7 @@ export class SkilltreeNodeComponent implements AfterViewInit{
 
   ngAfterViewInit(): void {
     if (this.centerOnLoad) {
-      this.el.nativeElement.scrollIntoView(); // todo: would be nicer to return to last position but I dont know how to do that
+      //this.el.nativeElement.scrollIntoView(); // todo: would be nicer to return to last position but I dont know how to do that
     }
   }
   @Input() self !: SkilltreeNode
@@ -31,6 +31,7 @@ export class SkilltreeNodeComponent implements AfterViewInit{
         this.skilltreeService.skillpoints -= this.self.skillpoint_cost;
         this.skilltreeService.unlockedSkilltreeNodes.push(this.self.id);
         this.skilltreeService.refreshThickLines()
+        this.skilltreeService.updateCanUseUV();
       }
     });
   }

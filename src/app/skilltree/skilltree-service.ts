@@ -13,13 +13,16 @@ export class SkilltreeService {
 
     lightSkilltreeNodeID : number = 18
     canUseUV = false;
+
+    lastSkilltreeScrollPosition! : {x: number, y: number};
+
     updateCanUseUV() : boolean {
         this.canUseUV = this.unlockedSkilltreeNodes.includes(this.lightSkilltreeNodeID);
         return this.canUseUV;
     }
 
     init() {
-        this.backendService.Get<GetSkilltreeResponse>(GetRequestTypeUrls.GetSkilltree).subscribe(r => {
+        return this.backendService.Get<GetSkilltreeResponse>(GetRequestTypeUrls.GetSkilltree).subscribe(r => {
         this.allSkilltreeNodes = r.skilltree_nodes;
         this.unlockedSkilltreeNodes = r.unlocked_skilltree_nodes;
         this.skillpoints = r.availableSkillpoints;
@@ -36,11 +39,12 @@ export class SkilltreeService {
             }
         }
         this.refreshThickLines()
-        });
+
         setTimeout(()=> {
     
         this.updateCanUseUV();
         }, 0);
+        });
     }
 
     refreshThickLines() {

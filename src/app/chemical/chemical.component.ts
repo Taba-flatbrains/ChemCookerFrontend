@@ -41,7 +41,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   }
 
   @ViewChild('box') box : ElementRef | undefined;
-  ManualDragging : boolean = false;
+  ManualDragging : boolean = false;  // todo: add drag functionality for touch devices: https://www.reddit.com/r/learnjavascript/comments/1lp3htn/how_can_i_add_mobile_support_to_a_page_built_on/
   ngOnInit(): void {
     if(this.draggable && this.initialPosition) {
       this.Style = {'position': 'absolute', 'top.px': this.initialPosition.y, 'left.px': this.initialPosition.x};
