@@ -39,6 +39,7 @@ import { SkilltreeService } from './skilltree/skilltree-service';
 import { PendingReactionsComponent } from './pending-reactions/pending-reactions.component';
 import { DailyChallengeSelectorComponent } from './daily-challenge-selector/daily-challenge-selector.component';
 import { InitAccountDialogComponent } from './init-account-dialog/init-account-dialog.component';
+import { ChangeDifficultyComponent } from './change-difficulty/change-difficulty.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { InitAccountDialogComponent } from './init-account-dialog/init-account-d
     NicknameChemicalComponent,
     PendingReactionsComponent,
     DailyChallengeSelectorComponent,
-    InitAccountDialogComponent
+    InitAccountDialogComponent,
+    ChangeDifficultyComponent
   ],
   imports: [
     BrowserModule,

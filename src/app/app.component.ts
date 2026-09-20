@@ -23,6 +23,7 @@ import { SkilltreeService } from './skilltree/skilltree-service';
 import { DailyChallengeSelectorComponent } from './daily-challenge-selector/daily-challenge-selector.component';
 import { CookieService } from 'ngx-cookie-service';
 import { InitAccountDialogComponent } from './init-account-dialog/init-account-dialog.component';
+import { ChangeDifficultyComponent } from './change-difficulty/change-difficulty.component';
 
 @Component({
   selector: 'app-root',
@@ -106,6 +107,12 @@ export class AppComponent implements OnInit {
   openInitAccountDialog() {
     this.dialog.open(InitAccountDialogComponent, {
       disableClose: true
+    });
+  }
+
+  openChangeDifficultyDialog() { 
+    this.dialog.open(ChangeDifficultyComponent, {
+     
     });
   }
 }

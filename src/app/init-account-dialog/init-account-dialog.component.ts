@@ -29,6 +29,7 @@ export class InitAccountDialogComponent {
     }
 
   initTempAccount(difficulty: number) {
+    this.loggedInService.Difficulty = difficulty;
     this.backendService.Post<InitTempAccountRequest, InitTempAccountResponse>(PostRequestTypeUrls.InitTempAccount, {difficulty: difficulty}).subscribe({
       next: (response) => {
         if (response.success) {

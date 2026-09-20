@@ -12,13 +12,14 @@ export class LoggedInService {
     LoggedIn : boolean = false;
     LoggedInAs: string = "";
     RealAccount: boolean = false;
+    Difficulty: number = 0;
 
     LoggedInStatusChangeEvent = new Subject<boolean>()
 
     CheckLoggedIn() : Observable<ValidTokenResponse> {
         if (!this.cookieService.check('token')) {
             return new Observable<ValidTokenResponse>(subscriber => {
-                subscriber.next({valid: false, name: "", temp_account: true});
+                subscriber.next({valid: false, name: "", temp_account: true, difficulty: 0});
                 subscriber.complete();
             });
         }
@@ -36,6 +37,7 @@ export class LoggedInService {
             this.LoggedInAs = response.name;
             this.RealAccount = !response.temp_account;
             this.LoggedInStatusChangeEvent.next(response.valid)
+            this.Difficulty = response.difficulty;
             Subscription(this.LoggedIn);
             // if the token is not valid, delete it
             if (!response.valid) {

@@ -46,7 +46,8 @@ export enum PostRequestTypeUrls {
     UnlockSkilltreeNode = "/skilltree-upgrade",
     SetNickame = "/set-nickname",
     InitTempAccount = "/create_temp_account",
-    UpgradeAccountPermanent = "/upgrade_account_permanent"
+    UpgradeAccountPermanent = "/upgrade_account_permanent",
+    ChangeDifficulty = "/change-difficulty"
 }
 
 
@@ -100,17 +101,23 @@ export interface InitTempAccountRequest {
     difficulty: number;
 }
 
+export interface ChangeDifficultyRequest {
+    difficulty: number;
+}
+
 // Response Types
 export interface ValidTokenResponse {
     valid: boolean;
     name: string;
     temp_account: boolean;
+    difficulty: number;
 }
 
 export interface LoginResponse {
     success: boolean;
     token: string;
     name: string;
+    difficulty: number;
 }
 
 export interface CreateAccountResponse { // same as login response
@@ -171,5 +178,9 @@ export interface UnlockSkilltreeNodeResponse {
 }
 
 export interface UpdateNicknameResponse {
+    success: boolean;
+}
+
+export interface ChangeDifficultyResponse {
     success: boolean;
 }

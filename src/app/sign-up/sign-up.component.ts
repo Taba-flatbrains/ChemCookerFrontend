@@ -41,6 +41,7 @@ export class SignUpComponent {
       alert("Please enter a valid email address!"); // todo: better error handling
       return;
     }
+    this.loggedInService.Difficulty = this.parseDifficulty(this.difficultyFormControl.value!);
     if (!this.loggedInService.LoggedIn) {
       this.backendService.Post<CreateAccountRequest, CreateAccountResponse>(PostRequestTypeUrls.CreateAccount, {
         username: this.usernameFormControl.value!,

@@ -1,0 +1,9 @@
+<div class="flex-column">
+    <p>Changing Difficulty will reset your Account. </p>
+    <p>Are you sure?</p>
+    <div class="flex-row">
+        <button mat-raised-button color="primary" (click)="changeDifficulty(DifficultyLevel.Easy)" [disabled]="loggedInService.Difficulty === DifficultyLevel.Easy">Easy</button>
+        <button mat-raised-button color="primary" (click)="changeDifficulty(DifficultyLevel.Medium)" [disabled]="loggedInService.Difficulty === DifficultyLevel.Medium">Medium</button>
+        <button mat-raised-button color="primary" (click)="changeDifficulty(DifficultyLevel.Hard)" [disabled]="loggedInService.Difficulty === DifficultyLevel.Hard">Hard</button>
+    </div>
+</div>

@@ -29,6 +29,7 @@ export class LoginComponent {
       this.loggedInService.RealAccount = true;
       this.loggedInService.LoggedInAs = response.name;
       this.loggedInService.LoggedInStatusChangeEvent.next(true)
+      this.loggedInService.Difficulty = response.difficulty;
       this.dialogRef.close()
     });
   }
