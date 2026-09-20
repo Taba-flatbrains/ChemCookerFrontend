@@ -46,7 +46,6 @@ export class CookerComponent implements OnInit{
         this.questService.refreshQuests();
       } else if (response.added_to_pending) {
         this.chemService.pendingReactions.push({inputs: this.chemService.cookerChemicals, temp: +this.tempFormControl.value!, uv: this.uvFormControl.value!});
-        console.log(this.chemService.pendingReactions);
       }
       this.clear()
     });
