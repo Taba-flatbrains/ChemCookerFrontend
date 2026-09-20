@@ -40,6 +40,7 @@ import { PendingReactionsComponent } from './pending-reactions/pending-reactions
 import { DailyChallengeSelectorComponent } from './daily-challenge-selector/daily-challenge-selector.component';
 import { InitAccountDialogComponent } from './init-account-dialog/init-account-dialog.component';
 import { ChangeDifficultyComponent } from './change-difficulty/change-difficulty.component';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ChangeDifficultyComponent } from './change-difficulty/change-difficulty
     PendingReactionsComponent,
     DailyChallengeSelectorComponent,
     InitAccountDialogComponent,
-    ChangeDifficultyComponent
+    ChangeDifficultyComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,

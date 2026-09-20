@@ -181,7 +181,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
 @Injectable({
   providedIn: "root"
 })
-export class RDKitLoaderService implements OnDestroy {
+export class RDKitLoaderService implements OnDestroy { // todo: get a better smiles drawer
   private rdkitSubject$!: ReplaySubject<RDKitModule>;
 
   constructor() {}
