@@ -5,4 +5,5 @@
     padding: 10px;
     padding-bottom: 0px;
     gap: 10px;
+    user-select: text;
 }
