@@ -2,8 +2,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 10px;
-    padding-bottom: 0px;
     gap: 10px;
+    padding: 10px;
     user-select: text;
 }

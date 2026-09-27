@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BackendService, PostRequestTypeUrls, UpdateNickanameRequest, UpdateNicknameResponse } from '../util/backend.service';
@@ -30,4 +30,5 @@ export interface NichnameChemicalData {
   smile: string;
   iupac: string;
   nickname: string;
+  zoomOnly: boolean; // zoomOnly disables nickname change and uses popup only to be able to see molecule better
 }

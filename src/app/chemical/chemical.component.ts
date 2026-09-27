@@ -24,6 +24,7 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
   @Input() initialPosition : {x: number, y: number} | undefined;
   @Input() self : Chemical | undefined;
   @Input() touchable : boolean = true;
+  @Input() large : boolean = false;
   Style : { [klass: string]: any; } = {};
 
   @Output() position : {x: number, y: number} | undefined;
@@ -71,7 +72,8 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
       data: {
         smile: this.smile,
         iupac: this.iupac,
-        nickname: this.nickname
+        nickname: this.nickname,
+        zoomOnly: false
       }
     });
   }
@@ -112,6 +114,12 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
     // limit height to 10% of screen height
     if (height > window.outerHeight * 0.10) {
       height = window.outerHeight * 0.10;
+    }
+
+    if (this.large) {
+      height = Math.min(window.outerHeight * 0.5, height * 2)
+      width = Math.min(window.outerWidth * 0.5, width * 2)
+      return {width: width, height: height};
     }
 
     return {width: width, height: height};

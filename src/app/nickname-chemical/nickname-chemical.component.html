@@ -1,6 +1,6 @@
 <div class="flex-container">
-<chemical [smile]="data.smile" [iupac]="data.iupac" [nickname]="data.nickname" [draggable]="false" [touchable]="false"></chemical>
-<mat-form-field appearance="fill" class="full-width">
+<chemical [smile]="data.smile" [iupac]="data.iupac" [nickname]="data.nickname" [draggable]="false" [touchable]="false" [large]="true"></chemical>
+<mat-form-field appearance="fill" class="full-width" *ngIf="!data.zoomOnly" style="margin-bottom: -10px;">
   <mat-label>New Nickname</mat-label>
   <input matInput [formControl]="nicknameFormControl">
 </mat-form-field>

@@ -4,6 +4,9 @@ import { RDKitModule } from '@rdkit/rdkit';
 import { RDKitLoaderService } from '../chemical/chemical.component';
 import { QuestService } from './quest.service';
 import { LoggedInService } from '../login/logged-in.service';
+import { NicknameChemicalComponent } from '../nickname-chemical/nickname-chemical.component';
+import { ChemicalsService } from '../chemical/chemicals.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-quest',
@@ -12,7 +15,8 @@ import { LoggedInService } from '../login/logged-in.service';
 })
 export class QuestComponent implements AfterViewInit, OnChanges, OnInit {
   constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef,
-    private questService: QuestService, private loggedInService: LoggedInService
+    private questService: QuestService, private loggedInService: LoggedInService, private chemService:ChemicalsService,
+    private dialog: MatDialog
   ) {}
 
   qctypes = QuestConditionTypes; // for html access
@@ -118,6 +122,18 @@ export class QuestComponent implements AfterViewInit, OnChanges, OnInit {
   selectQuest() {
     this.questService.changeCurrentQuest(this.self.id);
   }
+
+  openZoomDialog() {
+      if (this.self.condition_type != QuestConditionTypes.ObtainChemical) { return; }
+      const dialogRef = this.dialog.open(NicknameChemicalComponent, {
+        data: {
+          smile: this.self.condition_value,
+          iupac: "",
+          nickname: "",
+          zoomOnly: true
+        }
+      });
+    }
 }
 
 export interface Quest {
