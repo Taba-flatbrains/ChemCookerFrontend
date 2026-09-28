@@ -2,7 +2,7 @@ import { CdkDrag, CdkDragEnd, CdkDragHandle, DragDrop, DragDropModule } from '@a
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Injectable, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 // Import RDKitModule as a value, not just a type
-import {RDKitModule} from '@rdkit/rdkit';
+import {JSMol, RDKitModule} from '@rdkit/rdkit';
 import { first, Observable, ReplaySubject } from 'rxjs';
 import { Chemical, newChemical } from '../chem-bar/chem-bar.component';
 import { ChemicalsService } from './chemicals.service';
@@ -92,9 +92,12 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
           this.text = this.text.replaceAll("_{", "<sub>") // todo: add better system (numbers immediatly after letters are always low or add undescore to lower immediatly following char)
           this.text = this.text.replaceAll("_}", "</sub>")
         }
-        const temp : string | undefined = rdkit.get_mol(this.true_smile)?.get_svg(this.EstimateSizeSmile(this.true_smile).width, this.EstimateSizeSmile(this.true_smile).height);
-        if (temp)
-          this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp);
+        const temp : JSMol | null = rdkit.get_mol(this.true_smile)
+        if (temp) {
+          // maybe as another todo: mark radical kations and anions in different colours to make more obvious. (orange?, red, blue)
+          this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp.get_svg(this.EstimateSizeSmile(this.true_smile).width, this.EstimateSizeSmile(this.true_smile).height));
+          temp.delete()
+        }
         this.cdref.detectChanges();
       }
     )
@@ -117,8 +120,9 @@ export class ChemicalComponent implements AfterViewInit, OnInit {
     }
 
     if (this.large) {
-      height = Math.min(window.outerHeight * 0.5, height * 2)
-      width = Math.min(window.outerWidth * 0.5, width * 2)
+      let multiplier = 2.2
+      height = Math.min(window.outerHeight * 0.5, height * multiplier)
+      width = Math.min(window.outerWidth * 0.5, width * multiplier)
       return {width: width, height: height};
     }
 

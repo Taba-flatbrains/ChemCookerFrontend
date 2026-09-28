@@ -70,9 +70,11 @@ export class QuestComponent implements AfterViewInit, OnChanges, OnInit {
           this.text = this.text.replaceAll("_{", "<sub>") // todo: add better system (numbers immediatly after letters are always low or add undescore to lower immediatly following char)
           this.text = this.text.replaceAll("_}", "</sub>")
         }
-        const temp : string | undefined = rdkit.get_mol(this.true_smile)?.get_svg(this.EstimateSizeSmile(this.true_smile).width, this.EstimateSizeSmile(this.true_smile).height);
-        if (temp)
-          this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp);
+        const temp : any = rdkit.get_mol(this.true_smile);
+        if (temp) {
+          this.svg = this.domSanitizer.bypassSecurityTrustHtml(temp.get_svg(this.EstimateSizeSmile(this.true_smile).width, this.EstimateSizeSmile(this.true_smile).height));
+          temp.delete()
+        }
         this.cdref.detectChanges();
       }
     )
