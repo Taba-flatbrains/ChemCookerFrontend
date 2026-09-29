@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { JSMol, RDKitModule } from '@rdkit/rdkit';
 import { RDKitLoaderService } from '../chemical/chemical.component';
@@ -8,9 +8,14 @@ import { RDKitLoaderService } from '../chemical/chemical.component';
   templateUrl: './tiny-chemical.component.html',
   styleUrls: ['./tiny-chemical.component.css']
 })
-export class TinyChemicalComponent implements AfterViewInit {
+export class TinyChemicalComponent implements AfterViewInit, OnDestroy {
+  animationTimer : NodeJS.Timeout;
   constructor(private rdkitService: RDKitLoaderService, private domSanitizer: DomSanitizer, private cdref: ChangeDetectorRef) {
-    setInterval(()=> { this.Animate() }, 30);
+    this.animationTimer = setInterval(()=> { this.Animate() }, 30);
+  }
+
+  ngOnDestroy(): void {
+    this.animationTimer.close()
   }
 
   @Input() smile : string = "C1C2CC3CC1CC(C2)C3";
