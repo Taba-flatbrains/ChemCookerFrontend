@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChemicalComponent } from './chemical/chemical.component';
 
@@ -41,6 +41,8 @@ import { DailyChallengeSelectorComponent } from './daily-challenge-selector/dail
 import { InitAccountDialogComponent } from './init-account-dialog/init-account-dialog.component';
 import { ChangeDifficultyComponent } from './change-difficulty/change-difficulty.component';
 import { InfoComponent } from './info/info.component';
+import { provideRouter } from '@angular/router';
+import { DailyChallengeService } from './daily-challenge/daily-challenge.service';
 
 @NgModule({
   declarations: [
@@ -80,7 +82,7 @@ import { InfoComponent } from './info/info.component';
     CdkDragPlaceholder,
     MtxTooltipModule,
 ],
-  providers: [LoggedInService, BackendService, ChemicalsService, SkilltreeService],
+  providers: [LoggedInService, BackendService, ChemicalsService, SkilltreeService, provideRouter(routes), DailyChallengeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

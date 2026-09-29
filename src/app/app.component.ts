@@ -1,5 +1,5 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, OnInit, Signal } from '@angular/core';
+import { ActivatedRoute, Data, Router, RouterOutlet } from '@angular/router';
 import { ChemicalComponent } from './chemical/chemical.component';
 import { Chemical } from './chem-bar/chem-bar.component';
 import { LoggedInService } from './login/logged-in.service';
@@ -25,6 +25,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { InitAccountDialogComponent } from './init-account-dialog/init-account-dialog.component';
 import { ChangeDifficultyComponent } from './change-difficulty/change-difficulty.component';
 import { InfoComponent } from './info/info.component';
+import { DailyChallenge, DailyChallengeService } from './daily-challenge/daily-challenge.service';
+import {toSignal} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-root',
@@ -33,8 +35,10 @@ import { InfoComponent } from './info/info.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
   returnToMain() {
-    throw new Error('Method not implemented.'); // should return to main, button should only be visible when in daily challenge
+    this.dailyChallengeService.inDailyChallenge = false
+    this.router.navigate([""])
   }
 
 
@@ -46,7 +50,8 @@ export class AppComponent implements OnInit {
 
 
   constructor(public loggedInService:LoggedInService, private dialog:MatDialog, public chemService:ChemicalsService,
-    public questService:QuestService, private skilltreeService:SkilltreeService, private cookieService:CookieService
+    public questService:QuestService, private skilltreeService:SkilltreeService, private cookieService:CookieService,
+    private router:Router, public dailyChallengeService:DailyChallengeService, private route:ActivatedRoute
   ) { }
 
   title = 'ChemCookerFrontend';
@@ -87,6 +92,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.questService.updateQuests();
+    this.dailyChallengeService.refreshDailyChallenges();
     this.loggedInService.LoggedInStatusChangeEvent.subscribe(() => {
         if (!this.loggedInService.LoggedIn) {
             this.openInitAccountDialog();
@@ -94,6 +100,7 @@ export class AppComponent implements OnInit {
         this.questService.updateQuests();
         this.skilltreeService.init();
         this.chemService.refreshPendingReactions();
+        this.dailyChallengeService.refreshDailyChallenges();
         setInterval(() => {
           this.chemService.refreshPendingReactions(false);
         }, 5000);
