@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
 
 
   constructor(public loggedInService:LoggedInService, private dialog:MatDialog, public chemService:ChemicalsService,
-    public questService:QuestService, private skilltreeService:SkilltreeService, private cookieService:CookieService,
+    public questService:QuestService, public skilltreeService:SkilltreeService, private cookieService:CookieService,
     private router:Router, public dailyChallengeService:DailyChallengeService, private route:ActivatedRoute
   ) { }
 
