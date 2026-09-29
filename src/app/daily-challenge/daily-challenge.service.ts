@@ -18,7 +18,7 @@ export const dailyResolver: ResolveFn<DailyChallenge> = (
   const r = dailyChallengeService.dailyChallenges.find((v:DailyChallenge) => v.id.toString() == dCId); 
   if (r) {
     dailyChallengeService.currentDailyChallengeID = +dCId;
-    dailyChallengeService.inDailyChallenge = true
+    dailyChallengeService.loadDailyChallange();
     return r; // this value is unused and unusable because im bad at programming, the only rason for this resolver is to fetch the id
   }
   else
@@ -35,5 +35,10 @@ export class DailyChallengeService {
   
   refreshDailyChallenges() {
     // todo: fetch all daily challenges
+  }
+
+  loadDailyChallange() {
+    this.inDailyChallenge = true;
+    // todo: change available chems and stuff
   }
 }
