@@ -6,6 +6,7 @@ import { SkilltreeService } from '../skilltree/skilltree-service';
 import { QuestService } from '../quest/quest.service';
 import { Chemical } from '../chem-bar/chem-bar.component';
 import { ArtstyleService } from '../util/artstyle.service';
+import { ReactionBookService } from '../reaction-book/reaction-book.service';
 
 @Component({
   selector: 'app-cooker',
@@ -15,7 +16,7 @@ import { ArtstyleService } from '../util/artstyle.service';
 export class CookerComponent implements OnInit{
   constructor(private el: ElementRef, private render: Renderer2, public chemService:ChemicalsService, 
     private backendService:BackendService, public skilltreeService:SkilltreeService, private questService:QuestService,
-  public artstyleService:ArtstyleService) { }
+  public artstyleService:ArtstyleService, private reactionBookService:ReactionBookService) { }
 
 
   ngOnInit() {
@@ -34,7 +35,14 @@ export class CookerComponent implements OnInit{
       uv: this.uvFormControl.value!
     }).subscribe(response => {
       if (response.success) {
-        this.chemService.unlockedChemicals.push(...response.new_chems); 
+        this.reactionBookService.completedReactions.push({
+          inputs: response.inputs,
+          outputs: response.products.map(chem => chem.smile),
+          temp: response.temp,
+          uv: response.uv,
+          description: response.description
+        });
+        this.chemService.unlockedChemicals.push(...response.new_chems);
         this.skilltreeService.skillpoints += response.skillpoints_gained;
         this.questService.completedQuests.push(...response.quests_completed);
         for (var chem of response.products) {

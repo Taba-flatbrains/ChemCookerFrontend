@@ -27,6 +27,8 @@ import { ChangeDifficultyComponent } from './change-difficulty/change-difficulty
 import { InfoComponent } from './info/info.component';
 import { DailyChallenge, DailyChallengeService } from './daily-challenge/daily-challenge.service';
 import {toSignal} from '@angular/core/rxjs-interop';
+import { ReactionBookComponent } from './reaction-book/reaction-book.component';
+import { ReactionBookService } from './reaction-book/reaction-book.service';
 
 @Component({
   selector: 'app-root',
@@ -48,10 +50,16 @@ export class AppComponent implements OnInit {
     });
   }
 
+  openReactionBook() {
+    const dialogRef = this.dialog.open(ReactionBookComponent, {
+      
+    })
+  }
 
   constructor(public loggedInService:LoggedInService, private dialog:MatDialog, public chemService:ChemicalsService,
     public questService:QuestService, public skilltreeService:SkilltreeService, private cookieService:CookieService,
-    private router:Router, public dailyChallengeService:DailyChallengeService, private route:ActivatedRoute
+    private router:Router, public dailyChallengeService:DailyChallengeService, private route:ActivatedRoute,
+    public reactionBookService:ReactionBookService
   ) { }
 
   title = 'ChemCookerFrontend';
@@ -101,6 +109,7 @@ export class AppComponent implements OnInit {
         this.skilltreeService.init();
         this.chemService.refreshPendingReactions();
         this.dailyChallengeService.refreshDailyChallenges();
+        this.reactionBookService.updateReactionBook();
         setInterval(() => {
           this.chemService.refreshPendingReactions(false);
         }, 5000);

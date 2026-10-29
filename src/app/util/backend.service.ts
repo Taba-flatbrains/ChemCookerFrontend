@@ -7,6 +7,7 @@ import { Quest } from '../quest/quest.component';
 import { SkilltreeNode } from '../skilltree-node/skilltree-node.component';
 import { Reaction } from '../cooker/cooker.component';
 import { environment } from 'src/environments/environment';
+import { fullReaction } from '../reaction-book/reaction-book.component';
 
 @Injectable({
     providedIn: 'root'
@@ -35,7 +36,8 @@ export enum GetRequestTypeUrls {
     GetAvailableSkillpoints = "/availableskillpoints",
     ValidateToken = "/validatetoken",
     GetAllQuests = "/all-quests",
-    CheckPendingReactions = "/pending-reactions"
+    CheckPendingReactions = "/pending-reactions",
+    GetCompletedReactions = "/completed-reactions"
 }
 
 export enum PostRequestTypeUrls {
@@ -147,6 +149,7 @@ export interface CookResponse {
     skillpoints_gained: number;
     quests_completed: number[]; // array of quest IDs
     added_to_pending: boolean;
+    description: string | null;
 }
 
 export interface NicknameChemicalResponse {
@@ -183,4 +186,8 @@ export interface UpdateNicknameResponse {
 
 export interface ChangeDifficultyResponse {
     success: boolean;
+}
+
+export interface GetCompletedReactionsResponse {
+    reactions: fullReaction[];
 }

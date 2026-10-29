@@ -1,0 +1,19 @@
+<div class="flex-column">
+    <div class="reaction" *ngFor="let reaction of reactionBookService.completedReactions">
+        <div class="inputs chemflex"><chemical [smile]="input" [iupac]="''" [nickname]="''" [draggable]="false" [touchable]="false" [large]="false" *ngFor="let input of reaction.inputs"></chemical></div>
+        <!-- reaktionspfeil mit conditions darüber-->
+        <div class="reaction-arrow-and-conditions-flex">
+            <p class="spacer"></p>
+            <p class="conditions">{{tempToString[reaction.temp]}}</p>
+            <p class="arrow">&rarr;</p>
+            <p class="conditions">{{reaction.uv ? "hv" : ""}}</p>
+            <p class="spacer"></p>
+        </div>
+        <div class="outputs chemflex"><chemical [smile]="output" [iupac]="''" [nickname]="''" [draggable]="false" [touchable]="false" [large]="false" *ngFor="let output of reaction.outputs"></chemical></div>
+        <mat-icon [mtxTooltip]="descTooltip" [mtxTooltipContext]="reaction" *ngIf="reaction.description">info</mat-icon>
+    </div>
+</div>
+
+<ng-template #descTooltip let-reaction>
+    <p>{{reaction.description}}</p>
+</ng-template>

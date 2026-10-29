@@ -43,6 +43,7 @@ import { ChangeDifficultyComponent } from './change-difficulty/change-difficulty
 import { InfoComponent } from './info/info.component';
 import { provideRouter } from '@angular/router';
 import { DailyChallengeService } from './daily-challenge/daily-challenge.service';
+import { ReactionBookComponent } from './reaction-book/reaction-book.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { DailyChallengeService } from './daily-challenge/daily-challenge.service
     DailyChallengeSelectorComponent,
     InitAccountDialogComponent,
     ChangeDifficultyComponent,
-    InfoComponent
+    InfoComponent,
+    ReactionBookComponent
   ],
   imports: [
     BrowserModule,
